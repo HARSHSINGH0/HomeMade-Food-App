@@ -13,19 +13,19 @@
         android:id="@+id/dialogue_logo_login">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-70dp"
+            android:layout_width="500dp"
+            android:layout_height="300dp"
+
+            android:rotationX="10"
             app:srcCompat="@drawable/ic_horizontal_logo_dialogue" />
 
         <ProgressBar
             android:id="@+id/progressBar"
 
-            style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="190dp"
+            android:layout_marginTop="150dp"
             android:visibility="invisible" />
     </RelativeLayout>
 
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/dialogue_logo_login"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="-200dp">
+        android:layout_marginTop="-100dp">
 
         <TextView
             android:id="@+id/txt_emailid"
@@ -84,15 +84,15 @@
             tools:ignore="Deprecated" />
 
         <Button
+            android:id="@+id/login_button1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Login"
-            android:fontFamily="@font/acme"
-            android:id="@+id/login_button1"
             android:layout_below="@+id/edt_passwd"
             android:layout_centerHorizontal="true"
-            android:textSize="18sp"
-            android:background="@color/black"/>
+            android:background="@color/black"
+            android:fontFamily="@font/acme"
+            android:text="Login"
+            android:textSize="18sp" />
 
 
         <TextView

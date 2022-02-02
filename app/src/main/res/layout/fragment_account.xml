@@ -14,6 +14,7 @@
             android:layout_centerHorizontal="true"
             android:src="@drawable/ic_horizontal_logo"
             android:id="@+id/home_logo"
+
             />
 
         <RelativeLayout
@@ -21,21 +22,22 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/home_logo"
             android:id="@+id/firstRelative">
+
             <TextView
+                android:id="@+id/AccountSettingText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="30sp"
-                android:text="Account Settings2"
                 android:fontFamily="@font/acme"
-                android:id="@+id/AccountSettingText"
-                android:textColor="@color/black"/>
+                android:text="Account Settings"
+                android:textColor="@color/black"
+                android:textSize="30sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/AccountSettingText"
                 android:fontFamily="@font/acme"
-                android:text="Edit Profile2"
+                android:text="Edit Profile"
                 android:textSize="20sp"
                 android:layout_marginTop="10dp"
                 android:id="@+id/editprofile"/>
@@ -51,19 +53,20 @@
                 android:onClick="logout"/>
 
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/firstRelative"
             android:layout_marginTop="50dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="30sp"
-                android:text="Orders"
                 android:fontFamily="@font/acme"
+                android:text="Orders"
                 android:textColor="@color/black"
-                />
+                android:textSize="30sp" />
         </RelativeLayout>
 
 

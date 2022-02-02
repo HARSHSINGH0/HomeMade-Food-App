@@ -21,20 +21,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.w3c.dom.Text;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class SignupFragment extends AppCompatActivity {
-    EditText mName, mEmail, mPassword;
+    EditText mName, mEmail, mPassword,mPhone;
     Button mSignupBtn;
     TextView mLoginBtn;
     FirebaseAuth fAuth;
     ProgressBar progressBar;
     TextView login_textview;
+    FirebaseFirestore fStore;
+    String userID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,11 +50,14 @@ public class SignupFragment extends AppCompatActivity {
         mName = findViewById(R.id.edt_name);
         mEmail = findViewById(R.id.edt_email);
         mPassword = findViewById(R.id.edt_passwd);
+        mPhone=findViewById(R.id.edt_phone);
         mSignupBtn = findViewById(R.id.signup_button);
         mLoginBtn = findViewById(R.id.login_button1);
         fAuth = FirebaseAuth.getInstance();
+        fStore=FirebaseFirestore.getInstance();
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.INVISIBLE);
+
         if (fAuth.getCurrentUser()!=null){
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
             finish();
@@ -60,17 +71,19 @@ public class SignupFragment extends AppCompatActivity {
             }
         });
         mSignupBtn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 String name=mName.getText().toString().trim();
                 String email=mEmail.getText().toString().trim();
                 String password=mPassword.getText().toString().trim();
+                String phone=mPhone.getText().toString().trim();
                 if(TextUtils.isEmpty(email)){
                     mEmail.setError("Email is Required");
                     return;
                 }
                 if(TextUtils.isEmpty(name)){
-                    mEmail.setError("Name is Required");
+                    mName.setError("Name is Required");
                     return;
                 }
 
@@ -80,6 +93,15 @@ public class SignupFragment extends AppCompatActivity {
                 }
                 if(password.length() < 6){
                     mPassword.setError("Password Must be >= 6 Characters");
+                    return;
+
+                }
+                if(TextUtils.isEmpty(phone)){
+                    mPhone.setError("Mobile number is Required");
+                    return;
+                }
+                if(phone.length() < 9 | phone.length() >10){
+                    mPhone.setError("Mobile Number must be 10 characters");
                     return;
 
                 }
@@ -93,6 +115,13 @@ public class SignupFragment extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+                            userID=fAuth.getCurrentUser().getUid();
+                            DocumentReference documentReference=fStore.collection("users").document(userID);
+                            Map<String,Object> user=new HashMap<>();
+                            user.put("name",name);
+                            user.put("email",email);
+                            user.put("phone",phone);
+                            documentReference.set(user);
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
 
                         }
