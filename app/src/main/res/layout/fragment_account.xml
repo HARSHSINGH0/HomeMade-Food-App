@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="30sp"
-                android:text="AccountSettings"
+                android:text="Account Settings2"
                 android:fontFamily="@font/acme"
                 android:id="@+id/AccountSettingText"
                 android:textColor="@color/black"/>
