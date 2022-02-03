@@ -5,10 +5,11 @@
     android:background="@android:color/white">
 
     <RelativeLayout
+        android:id="@+id/firstRelativehome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
         android:layout_marginRight="15dp">
 
         <ImageView
@@ -16,15 +17,20 @@
             android:layout_height="100dp"
             android:layout_alignParentRight="true"
             android:layout_marginTop="-20dp"
+
             android:src="@drawable/ic_horizontal_logo" />
 
         <TextView
-
+            android:id="@+id/hello_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello Vehaas!"
-            android:textSize="15sp"
-            android:textStyle="italic"
-            />
+            android:fontFamily="@font/acme"
+            android:text="Hello !"
+            android:textSize="30sp" />
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/firstRelativehome" />
 </RelativeLayout>

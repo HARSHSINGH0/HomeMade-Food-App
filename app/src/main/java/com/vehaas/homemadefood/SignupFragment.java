@@ -130,6 +130,7 @@ public class SignupFragment extends AppCompatActivity {
                             progressBar.setVisibility(View.INVISIBLE);
                         }
 
+
                     }
                 });
 
