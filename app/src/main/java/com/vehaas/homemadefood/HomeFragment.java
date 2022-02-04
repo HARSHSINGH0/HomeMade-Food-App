@@ -35,19 +35,6 @@ public class HomeFragment extends Fragment {
         fAuth=FirebaseAuth.getInstance();
         hello_name1=v.findViewById(R.id.hello_name);
         userID=fAuth.getCurrentUser().getUid();
-        DocumentReference documentReference = fStore.collection("users").document(userID);
-        documentReference.addSnapshotListener(getActivity(),new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                try {
-                    hello_name1.setText(documentSnapshot.getString("name"));
-                }catch (Exception exception){
-                    Log.d("TAG", "onEvent: "+exception);
-                }
-
-            }
-        });
-
         return v;
     }
 }

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeMakerKitchen"
+    android:layout_margin="10dp">
+
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:src="@android:drawable/ic_menu_gallery"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/img_kitchenImg"/>
+
+    <TextView
+        android:id="@+id/txt_name_of_kitchen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img_kitchenImg"
+        android:layout_marginTop="20sp"
+        android:layout_marginBottom="20sp"
+        android:fontFamily="@font/acme"
+        android:text="Name of Kitchen: "
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/edt_kitchenName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txt_kitchen_desc"
+        android:layout_below="@+id/img_kitchenImg"
+        android:layout_toRightOf="@+id/txt_name_of_kitchen"
+        android:hint="Rashmi's Kitchen"
+        android:padding="10dp" />
+
+    <TextView
+
+        android:id="@+id/txt_kitchen_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_name_of_kitchen"
+        android:layout_marginTop="20sp"
+        android:layout_marginBottom="20sp"
+        android:fontFamily="@font/acme"
+        android:text="Kitchen Decscription : "
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/edt_kitchenDesc"
+        android:layout_width="wrap_content"
+
+        android:layout_height="100dp"
+        android:layout_below="@+id/edt_kitchenName"
+        android:layout_toRightOf="@+id/txt_kitchen_desc"
+        android:hint=" The Capital Kitchen by Taj. An all day alfresco dining experience, with indulgent comfort food whipped up from authentic recipes and ingredients. Take a trip down memory lane with a hint of nostalgia of years gone, a scrumptious spread with live counters offering Indian, European and Asian cuisines. An opulent affair created by our Master Chef complimented by decadent creations from our liquid chefs at the in-house ba"
+        android:padding="10dp" />
+
+    <TextView
+        android:id="@+id/txt_DishStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edt_kitchenDesc"
+        android:layout_marginTop="20sp"
+        android:layout_marginBottom="20sp"
+        android:fontFamily="@font/acme"
+        android:text="Dish Style : "
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/edt_DishStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edt_kitchenDesc"
+        android:layout_toRightOf="@+id/txt_DishStyle"
+        android:hint="North Indian Style"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/activeBottomNavIconColor2"/>
+</RelativeLayout>

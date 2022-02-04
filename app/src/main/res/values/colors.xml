@@ -9,7 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="InactiveBottomNavIconColor">#4E4A4A</color>
     <color name="InactiveBottomNavIconColor2">#595656</color>
-    <color name="activeBottomNavIconColor">#E54B4B</color>
+    <color name="activeBottomNavIconColor">#FFF05434</color>
+    <color name="activeBottomNavIconColor2">#F85F40</color>
     <color name="linkblue">#2F79B3</color>
 
 </resources>

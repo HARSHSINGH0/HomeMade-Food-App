@@ -38,10 +38,10 @@ public class SignupFragment extends AppCompatActivity {
     EditText mName, mEmail, mPassword,mPhone;
     Button mSignupBtn;
     TextView mLoginBtn;
-    FirebaseAuth fAuth;
+    public FirebaseAuth fAuth;
     ProgressBar progressBar;
     TextView login_textview;
-    FirebaseFirestore fStore;
+    public FirebaseFirestore fStore;
     String userID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,7 +108,6 @@ public class SignupFragment extends AppCompatActivity {
 
                 progressBar.setVisibility(View.VISIBLE);
 
-                Log.d("Tag:", "visbible ");
                 //now we register the user in firebase
                 fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 

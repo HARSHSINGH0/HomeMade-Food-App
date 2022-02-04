@@ -41,16 +41,32 @@
                 android:textSize="20sp"
                 android:layout_marginTop="10dp"
                 android:id="@+id/editprofile"/>
+
+
             <TextView
+                android:id="@+id/logouttext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/editprofile"
-                android:fontFamily="@font/acme"
-                android:text="Logout"
-                android:textSize="20sp"
                 android:layout_marginTop="10dp"
                 android:clickable="true"
-                android:onClick="logout"/>
+                android:fontFamily="@font/acme"
+                android:onClick="logout"
+                android:text="Logout"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/switchtohomemaker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/logouttext"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:fontFamily="@font/acme"
+                android:onClick="switchToKitchen"
+                android:text="Switch to Chef Kitchen "
+                android:textColor="@color/activeBottomNavIconColor"
+                android:textSize="30sp" />
 
         </RelativeLayout>
 
