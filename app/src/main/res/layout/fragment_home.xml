@@ -25,11 +25,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/acme"
-            android:text="Hello !"
+            android:text="Hey Foodie 😋"
+            android:textColor="@android:color/black"
             android:textSize="30sp" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@+id/hello_name">
+
+            <TextView
+                android:id="@+id/select_timing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/acme"
+                android:text="Timing   "
+                android:textColor="@android:color/darker_gray"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/spinner_timing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/select_timing"
+                android:theme="@style/SpinnerTheme"
+                android:clickable="true" />
+        </RelativeLayout>
+
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+
 </RelativeLayout>

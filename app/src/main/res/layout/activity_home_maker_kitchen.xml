@@ -9,11 +9,11 @@
 
 
     <ImageView
+        android:id="@+id/img_kitchenImg"
         android:layout_width="300dp"
         android:layout_height="150dp"
-        android:src="@android:drawable/ic_menu_gallery"
         android:layout_centerHorizontal="true"
-        android:id="@+id/img_kitchenImg"/>
+        android:src="@mipmap/ic_logolauncher" />
 
     <TextView
         android:id="@+id/txt_name_of_kitchen"
@@ -74,16 +74,55 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edt_kitchenDesc"
+        android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/txt_DishStyle"
         android:hint="North Indian Style"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"/>
+        android:padding="10dp" />
+    <TextView
+        android:id="@+id/txt_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_DishStyle"
+        android:layout_marginTop="20sp"
+        android:layout_marginBottom="20sp"
+        android:fontFamily="@font/acme"
+        android:text="Address : "
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/edt_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edt_DishStyle"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/txt_DishStyle"
+        android:hint="Bandra Reclamation, Bandra (West),Mumbai - 400 050, Maharashtra, India"
+        android:padding="10dp" />
+
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
-        android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:backgroundTint="@color/activeBottomNavIconColor2"/>
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/activeBottomNavIconColor2"
+        android:onClick="save_button_kitchen_desc"
+        android:text="Continue" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edt_address"
+        android:layout_margin="50dp"
+        android:layout_marginStart="50sp"
+        android:layout_marginTop="50sp"
+        android:layout_marginEnd="50sp"
+        android:layout_marginBottom="50sp"
+        android:indeterminateOnly="true"
+
+        android:visibility="invisible" />
+
 </RelativeLayout>

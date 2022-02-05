@@ -18,10 +18,10 @@
             />
 
         <RelativeLayout
+            android:id="@+id/firstRelative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/home_logo"
-            android:id="@+id/firstRelative">
+            android:layout_below="@+id/home_logo">
 
             <TextView
                 android:id="@+id/AccountSettingText"
@@ -33,14 +33,16 @@
                 android:textSize="30sp" />
 
             <TextView
+                android:id="@+id/editprofile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/AccountSettingText"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/acme"
                 android:text="Edit Profile"
-                android:textSize="20sp"
-                android:layout_marginTop="10dp"
-                android:id="@+id/editprofile"/>
+                android:textColor="@android:color/darker_gray"
+
+                android:textSize="20sp" />
 
 
             <TextView
@@ -53,27 +55,37 @@
                 android:fontFamily="@font/acme"
                 android:onClick="logout"
                 android:text="Logout"
+                android:textColor="@android:color/darker_gray"
                 android:textSize="20sp" />
 
+
+        </RelativeLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_marginTop="50sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/firstRelative"
+            android:id="@+id/switch_to_chef"
+            >
+
             <TextView
+                android:padding="15dp"
                 android:id="@+id/switchtohomemaker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/logouttext"
-                android:layout_marginTop="10dp"
                 android:clickable="true"
                 android:fontFamily="@font/acme"
                 android:onClick="switchToKitchen"
                 android:text="Switch to Chef Kitchen "
                 android:textColor="@color/activeBottomNavIconColor"
                 android:textSize="30sp" />
-
-        </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/firstRelative"
+            android:layout_below="@+id/switch_to_chef"
             android:layout_marginTop="50dp">
 
             <TextView

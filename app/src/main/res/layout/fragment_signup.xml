@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,136 +32,159 @@
             android:visibility="invisible" />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/dialogue_logo_login"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="-100dp">
 
-        <TextView
-            android:id="@+id/txt_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="@font/acme"
-            android:text="Name"
-            android:textColor="#4E4A4A"
-            android:textSize="30sp" />
-
-        <EditText
-            android:id="@+id/edt_name"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_name"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:fontFamily="@font/acme"
-            android:hint="Name"
-            android:textSize="30sp" />
-
-        <TextView
-            android:id="@+id/txt_emailid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/edt_name"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/acme"
-            android:text="Email"
-            android:textColor="#4E4A4A"
-            android:textSize="30sp" />
 
-        <EditText
-            android:id="@+id/edt_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_emailid"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:fontFamily="@font/acme"
-            android:hint="example@gmail.com"
-            android:textSize="30sp" />
+            android:layout_below="@+id/dialogue_logo_login"
+            android:layout_marginTop="-100dp">
 
-        <TextView
-            android:id="@+id/txt_passwd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/edt_email"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/acme"
-            android:text="Password"
-            android:textColor="#4E4A4A"
-            android:textSize="30sp" />
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-        <EditText
-            android:id="@+id/edt_passwd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_passwd"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginRight="10dp"
-            android:fontFamily="@font/acme"
-            android:hint="example@123"
-            android:password="true"
-            android:textSize="30sp" />
+                >
 
-        <TextView
-            android:id="@+id/txt_phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/edt_passwd"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/acme"
-            android:text="Mobile Number"
-            android:textColor="#4E4A4A"
-            android:textSize="30sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/edt_phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_phone"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginRight="10dp"
-            android:fontFamily="@font/acme"
-            android:hint="9898989898"
-            android:phoneNumber="true"
-            android:textSize="30sp" />
+                    <TextView
+                        android:id="@+id/txt_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:fontFamily="@font/acme"
+                        android:text="Name"
+                        android:textColor="#4E4A4A"
+                        android:textSize="30sp" />
 
-        <Button
-            android:id="@+id/signup_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/edt_phone"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:background="@color/activeBottomNavIconColor"
-            android:fontFamily="@font/acme"
-            android:text="Sign up"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
-            android:textSize="18sp" />
+                    <EditText
+                        android:id="@+id/edt_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_name"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="@font/acme"
+                        android:hint="Name"
+                        android:textSize="30sp" />
 
-        <TextView
-            android:id="@+id/login_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/signup_button"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="10sp"
-            android:autoLink="web"
-            android:fontFamily="@font/acme"
-            android:linksClickable="true"
-            android:onClick="login_txt"
-            android:text="Already a user ?"
-            android:textColor="@color/linkblue" />
-    </RelativeLayout>
+                    <TextView
+                        android:id="@+id/txt_emailid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/edt_name"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/acme"
+                        android:text="Email"
+                        android:textColor="#4E4A4A"
+                        android:textSize="30sp" />
+
+                    <EditText
+                        android:id="@+id/edt_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_emailid"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="@font/acme"
+                        android:hint="example@gmail.com"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:id="@+id/txt_passwd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/edt_email"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/acme"
+                        android:text="Password"
+                        android:textColor="#4E4A4A"
+                        android:textSize="30sp" />
+
+                    <EditText
+                        android:id="@+id/edt_passwd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_passwd"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="@font/acme"
+                        android:hint="example@123"
+                        android:password="true"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:id="@+id/txt_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/edt_passwd"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/acme"
+                        android:text="Mobile Number"
+                        android:textColor="#4E4A4A"
+                        android:textSize="30sp" />
+
+                    <EditText
+                        android:id="@+id/edt_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_phone"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="@font/acme"
+                        android:hint="9898989898"
+                        android:phoneNumber="true"
+                        android:textSize="30sp" />
+
+                    <RelativeLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:layout_below="@+id/edt_phone">
+                    <Button
+                        android:id="@+id/signup_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+
+                        android:layout_marginTop="20dp"
+                        android:background="@color/activeBottomNavIconColor"
+                        android:fontFamily="@font/acme"
+                        android:text="Sign up"
+                        android:textColor="#FFFFFF"
+                        android:textColorHint="#FFFFFF"
+                        android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/login_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/signup_button"
+                            android:layout_centerInParent="true"
+                            android:layout_marginBottom="50dp"
+                            android:layout_marginTop="10dp"
+                            android:autoLink="web"
+                            android:fontFamily="@font/acme"
+                            android:linksClickable="true"
+                            android:onClick="login_txt"
+                            android:text="Already a user ?"
+                            android:textColor="@color/linkblue" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </ScrollView>
+        </RelativeLayout>
 
 </RelativeLayout>

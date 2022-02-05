@@ -121,7 +121,9 @@ public class SignupFragment extends AppCompatActivity {
                             user.put("email",email);
                             user.put("phone",phone);
                             documentReference.set(user);
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                            intent.putExtra("name",name);
+                            startActivity(intent);
 
                         }
                         else {

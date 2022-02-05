@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity{
             Fragment selectedFragment=null;
             switch (item.getItemId()){
                 case R.id.nav_home:
+//                    showUserName();
                     selectedFragment=new HomeFragment();
                     break;
                 case R.id.nav_account:
@@ -46,14 +48,27 @@ public class MainActivity extends AppCompatActivity{
                 case R.id.nav_cart:
                     selectedFragment =new CartFragment();
                     break;
-
+                default:
+                    throw new IllegalStateException("Unexpected value: " + item.getItemId());
             }
             //Begin Transaction
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout,selectedFragment).commit();
             return true;
         };
     };
-
+    private Fragment showUserName(){
+        Bundle bundle = new Bundle();
+//        TextView hello_name=findViewById(R.id.hello_name);
+        Intent intent;
+        Fragment selectedFragment=null;
+        intent = getIntent();
+        String user_name= intent.getStringExtra("name").toString();
+        bundle.putString("user_name",user_name);
+        selectedFragment=new HomeFragment();
+        selectedFragment.setArguments(bundle);
+        return selectedFragment;
+//        hello_name.setText(user_name);
+    }
 
     public void logout(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -64,7 +79,6 @@ public class MainActivity extends AppCompatActivity{
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int which) {
-
                 dialog.dismiss();
                 FirebaseAuth.getInstance().signOut();//logging out the user
                 startActivity(new Intent(getApplicationContext(),LoginFragment.class));
@@ -101,7 +115,7 @@ public class MainActivity extends AppCompatActivity{
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int which) {
-
+                startActivity(new Intent(getApplicationContext(),HomeMakerKitchen.class));
                 dialog.dismiss();
 
             }

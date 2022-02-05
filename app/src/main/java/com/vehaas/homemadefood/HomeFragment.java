@@ -1,12 +1,15 @@
 package com.vehaas.homemadefood;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,11 +33,23 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.fragment_home,container,false);
+
         fStore=FirebaseFirestore.getInstance();
         fAuth=FirebaseAuth.getInstance();
-        hello_name1=v.findViewById(R.id.hello_name);
+
         userID=fAuth.getCurrentUser().getUid();
+        Log.d("TAG", "userid: "+userID+"fstore:"+fStore+"fauth:"+fAuth);
+        View v=inflater.inflate(R.layout.fragment_home,container,false);
+        hello_name1=v.findViewById(R.id.hello_name);
+        Spinner spinner = (Spinner) v.findViewById(R.id.spinner_timing);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.food_timing_spinner, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
         return v;
     }
+
 }
