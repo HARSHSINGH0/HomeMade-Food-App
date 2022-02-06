@@ -134,14 +134,16 @@
             </LinearLayout>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Go to Home"
-        android:backgroundTint="@color/activeBottomNavIconColor2"
-        android:textSize="15sp"
-        android:fontFamily="@font/acme"
-        android:layout_marginBottom="50dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"/>
+        android:layout_marginBottom="50dp"
+        android:backgroundTint="@color/activeBottomNavIconColor2"
+        android:fontFamily="@font/acme"
+        android:text="Go to Home"
+        android:onClick="gotohome_button"
+        android:textSize="15sp" />
 </RelativeLayout>

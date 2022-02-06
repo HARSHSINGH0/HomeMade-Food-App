@@ -15,89 +15,159 @@
         android:layout_centerHorizontal="true"
         android:src="@mipmap/ic_logolauncher" />
 
-    <TextView
-        android:id="@+id/txt_name_of_kitchen"
-        android:layout_width="wrap_content"
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/img_kitchenImg"
-        android:layout_marginTop="20sp"
-        android:layout_marginBottom="20sp"
-        android:fontFamily="@font/acme"
-        android:text="Name of Kitchen: "
-        android:textSize="20sp" />
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="10dp"
+        android:indeterminateOnly="true"
+        android:visibility="invisible" />
 
-    <EditText
-        android:id="@+id/edt_kitchenName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txt_kitchen_desc"
-        android:layout_below="@+id/img_kitchenImg"
-        android:layout_toRightOf="@+id/txt_name_of_kitchen"
-        android:hint="Rashmi's Kitchen"
-        android:padding="10dp" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
 
-    <TextView
+        android:layout_below="@+id/progressBar2"
 
-        android:id="@+id/txt_kitchen_desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_name_of_kitchen"
-        android:layout_marginTop="20sp"
-        android:layout_marginBottom="20sp"
-        android:fontFamily="@font/acme"
-        android:text="Kitchen Decscription : "
-        android:textSize="20sp" />
+        >
 
-    <EditText
-        android:id="@+id/edt_kitchenDesc"
-        android:layout_width="wrap_content"
+        <LinearLayout
 
-        android:layout_height="100dp"
-        android:layout_below="@+id/edt_kitchenName"
-        android:layout_toRightOf="@+id/txt_kitchen_desc"
-        android:hint=" The Capital Kitchen by Taj. An all day alfresco dining experience, with indulgent comfort food whipped up from authentic recipes and ingredients. Take a trip down memory lane with a hint of nostalgia of years gone, a scrumptious spread with live counters offering Indian, European and Asian cuisines. An opulent affair created by our Master Chef complimented by decadent creations from our liquid chefs at the in-house ba"
-        android:padding="10dp" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/progressBar2"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/txt_DishStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edt_kitchenDesc"
-        android:layout_marginTop="20sp"
-        android:layout_marginBottom="20sp"
-        android:fontFamily="@font/acme"
-        android:text="Dish Style : "
-        android:textSize="20sp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/edt_DishStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edt_kitchenDesc"
-        android:layout_marginTop="10dp"
-        android:layout_toRightOf="@+id/txt_DishStyle"
-        android:hint="North Indian Style"
-        android:padding="10dp" />
-    <TextView
-        android:id="@+id/txt_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_DishStyle"
-        android:layout_marginTop="20sp"
-        android:layout_marginBottom="20sp"
-        android:fontFamily="@font/acme"
-        android:text="Address : "
-        android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/txt_name_of_kitchen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20sp"
+                    android:fontFamily="@font/acme"
+                    android:text="Name of Kitchen: "
+                    android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/edt_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edt_DishStyle"
-        android:layout_marginTop="20dp"
-        android:layout_toRightOf="@+id/txt_DishStyle"
-        android:hint="Bandra Reclamation, Bandra (West),Mumbai - 400 050, Maharashtra, India"
-        android:padding="10dp" />
+                <EditText
+                    android:id="@+id/edt_kitchenName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/txt_kitchen_desc"
+                    android:layout_toRightOf="@+id/txt_name_of_kitchen"
+                    android:hint="Rashmi's Kitchen"
+                    android:padding="10dp" />
+
+                <TextView
+                    android:id="@+id/txt_kitchen_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_name_of_kitchen"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginBottom="20sp"
+                    android:fontFamily="@font/acme"
+                    android:text="Kitchen Decscription : "
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/edt_kitchenDesc"
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="100dp"
+                    android:layout_below="@+id/edt_kitchenName"
+                    android:layout_toRightOf="@+id/txt_kitchen_desc"
+                    android:hint=" The Capital Kitchen by Taj. An all day alfresco dining experience, with indulgent comfort food whipped up from authentic recipes and ingredients. Take a trip down memory lane with a hint of nostalgia of years gone, a scrumptious spread with live counters offering Indian, European and Asian cuisines. An opulent affair created by our Master Chef complimented by decadent creations from our liquid chefs at the in-house ba"
+                    android:padding="10dp" />
+
+                <TextView
+                    android:id="@+id/txt_DishStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edt_kitchenDesc"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginBottom="20sp"
+                    android:fontFamily="@font/acme"
+                    android:text="Dish Style : "
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/edt_DishStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edt_kitchenDesc"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/txt_DishStyle"
+                    android:hint="North Indian Style"
+                    android:padding="10dp" />
+
+                <TextView
+                    android:id="@+id/txt_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_DishStyle"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginBottom="20sp"
+                    android:fontFamily="@font/acme"
+                    android:text="Address : "
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/edt_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edt_DishStyle"
+                    android:layout_marginTop="20dp"
+                    android:layout_toRightOf="@+id/txt_DishStyle"
+                    android:hint="Bandra Reclamation, Bandra (West),Mumbai - 400 050, Maharashtra, India"
+                    android:padding="10dp" />
+
+                <TextView
+                    android:id="@+id/txt_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edt_address"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginBottom="20sp"
+                    android:fontFamily="@font/acme"
+                    android:text="Mobile : "
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/edt_phoneNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edt_address"
+                    android:layout_marginTop="20dp"
+                    android:layout_toRightOf="@+id/txt_DishStyle"
+                    android:hint="1234567890"
+                    android:inputType="number"
+                    android:padding="10dp" />
+                <TextView
+                    android:id="@+id/image_kitchen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edt_phoneNumber"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginBottom="20sp"
+                    android:fontFamily="@font/acme"
+                    android:text="Image : "
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_below="@+id/edt_phoneNumber"
+                    android:layout_toRightOf="@+id/image_kitchen" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
 
 
     <Button
@@ -110,19 +180,7 @@
         android:onClick="save_button_kitchen_desc"
         android:text="Continue" />
 
-    <ProgressBar
-        android:id="@+id/progressBar2"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edt_address"
-        android:layout_margin="50dp"
-        android:layout_marginStart="50sp"
-        android:layout_marginTop="50sp"
-        android:layout_marginEnd="50sp"
-        android:layout_marginBottom="50sp"
-        android:indeterminateOnly="true"
 
-        android:visibility="invisible" />
+
 
 </RelativeLayout>

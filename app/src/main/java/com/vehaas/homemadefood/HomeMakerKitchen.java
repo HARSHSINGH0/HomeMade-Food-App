@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,15 +36,17 @@ public class HomeMakerKitchen extends AppCompatActivity {
         rootNode=FirebaseDatabase.getInstance();
         reference=rootNode.getReference("kitchen");
         Query checkuser=reference.orderByChild("kitchen_userid").equalTo(user_id);
+
         ProgressBar pgb=findViewById(R.id.progressBar2);
         checkuser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+//                pgb.setVisibility(View.VISIBLE);
                 startActivity(new Intent(getApplicationContext(),KitchenFood.class));
-                pgb.setVisibility(View.VISIBLE);
             }
 
-            @Override
+            @Override//this for error in fetching data but this function wont run after user adds data
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
@@ -55,6 +58,8 @@ public class HomeMakerKitchen extends AppCompatActivity {
         EditText desc=findViewById(R.id.edt_kitchenDesc);
         EditText food_style=findViewById(R.id.edt_DishStyle);
         EditText kitchen_address=findViewById(R.id.edt_address);
+        EditText phone_number=findViewById(R.id.edt_phoneNumber);
+//        ImageView img_kitchen=findViewById(R.id.image_kitchen);
 
         FirebaseAuth fAuth;
         fAuth = FirebaseAuth.getInstance();
@@ -69,6 +74,7 @@ public class HomeMakerKitchen extends AppCompatActivity {
         reference=rootNode.getReference("kitchen");
         Kitchen_Newid_helper helperClass=new Kitchen_Newid_helper(Kitchen_name,Kitchen_desc,Kitchen_style,Kitchen_address,fAuth.getCurrentUser().getUid());
         reference.child(user_id).setValue(helperClass);
+
         startActivity(new Intent(getApplicationContext(),KitchenFood.class));
     }
 }
