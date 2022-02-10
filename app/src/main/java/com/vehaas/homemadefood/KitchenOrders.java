@@ -7,6 +7,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -17,32 +18,46 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.w3c.dom.Text;
+
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class KitchenOrders extends AppCompatActivity{
     //ui views
+
+
+
+
     private ImageView img_fdimg;
     private EditText edt_fdname,edt_fdDesc,fdStyle,fdStock,fdPrice;
     private Spinner spinner_food_timing_activity;
@@ -71,6 +86,9 @@ public class KitchenOrders extends AppCompatActivity{
         fdStyle=findViewById(R.id.fdStyle);
         fdStock=findViewById(R.id.fdStock);
         fdPrice=findViewById(R.id.fdPrice);
+
+
+
         spinner_food_timing_activity=findViewById(R.id.spinner_food_timing_activity);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.food_timing_spinner, android.R.layout.simple_spinner_item);
@@ -78,7 +96,10 @@ public class KitchenOrders extends AppCompatActivity{
         spinner_food_timing_activity.setAdapter(adapter);
         add_food_button=findViewById(R.id.add_food_button);
 
+        img_fdimg.setImageResource(R.drawable.ic_baseline_shopping_cart_24);
+
         fAuth=FirebaseAuth.getInstance();
+
 
         //setup progress dialog
         progressDialog=new ProgressDialog(this);
@@ -108,7 +129,14 @@ public class KitchenOrders extends AppCompatActivity{
                 inputData();
             }
         });
+        //will add filter feature afterwards --harsh
+
     }
+
+
+
+
+
     private String foodName,foodDesc,dishStyle,foodQuantity,originalPrice,timing;
 
     private void inputData() {
@@ -149,7 +177,7 @@ public class KitchenOrders extends AppCompatActivity{
         progressDialog.setMessage("Adding Product.....");
         progressDialog.show();
         final String timestamp=""+System.currentTimeMillis();
-
+        Log.d("TAG", "addFood: image_uri"+image_uri);
         if(image_uri==null){
             //upload without image
 
@@ -159,8 +187,8 @@ public class KitchenOrders extends AppCompatActivity{
             hashMap.put("foodName",foodName);
             hashMap.put("foodDesc",foodDesc);
             hashMap.put("dishStyle",dishStyle);
-            hashMap.put("dishStyle",dishStyle);
             hashMap.put("foodQuantity",foodQuantity);
+            hashMap.put("foodIcon","");//no image
             hashMap.put("originalPrice",originalPrice);
             hashMap.put("timing",timing);
             hashMap.put("timestamp",timestamp);
@@ -349,7 +377,7 @@ public class KitchenOrders extends AppCompatActivity{
                         pickFromGallery();
                     }else {
                         //permission denied
-                        Toast.makeText(this,"Storage permission ir required....",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this,"Storage permission is required....",Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -359,19 +387,21 @@ public class KitchenOrders extends AppCompatActivity{
     //handle image pick resuls;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(resultCode==IMAGE_PICK_GALLERY_CODE){
-            //image picked from gallery
-            //save picked image uri
-            image_uri=data.getData();
-            //set image
-            img_fdimg.setImageURI(image_uri);
+        if (resultCode==RESULT_OK){
+            if(resultCode==IMAGE_PICK_GALLERY_CODE){
+                //image picked from gallery
+                //save picked image uri
+                image_uri=data.getData();
+                //set image
+                img_fdimg.setImageURI(image_uri);
 
+            }
+            else if(resultCode==IMAGE_PICK_CAMERA_CODE){
+                //image picked from camera
+                img_fdimg.setImageURI(image_uri);
+            }
+            super.onActivityResult(requestCode, resultCode, data);
         }
-        else if(resultCode==IMAGE_PICK_CAMERA_CODE){
-            //image picked from camera
-            img_fdimg.setImageURI(image_uri);
-        }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     public void add_food_button(View view) {

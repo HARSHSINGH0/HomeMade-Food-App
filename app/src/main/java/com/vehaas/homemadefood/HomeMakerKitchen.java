@@ -35,22 +35,23 @@ public class HomeMakerKitchen extends AppCompatActivity {
         DatabaseReference reference;
         rootNode=FirebaseDatabase.getInstance();
         reference=rootNode.getReference("kitchen");
-        Query checkuser=reference.orderByChild("kitchen_userid").equalTo(user_id);
 
         ProgressBar pgb=findViewById(R.id.progressBar2);
-        checkuser.addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-//                pgb.setVisibility(View.VISIBLE);
-                startActivity(new Intent(getApplicationContext(),KitchenFood.class));
+                if (snapshot.hasChild(fAuth.getUid().toString())) {
+                    startActivity(new Intent(getApplicationContext(),KitchenFood.class));
+                    // run some code
+                }
             }
 
-            @Override//this for error in fetching data but this function wont run after user adds data
+            @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+
 
     }
     public void save_button_kitchen_desc(View view) {
@@ -59,6 +60,7 @@ public class HomeMakerKitchen extends AppCompatActivity {
         EditText food_style=findViewById(R.id.edt_DishStyle);
         EditText kitchen_address=findViewById(R.id.edt_address);
         EditText phone_number=findViewById(R.id.edt_phoneNumber);
+
 //        ImageView img_kitchen=findViewById(R.id.image_kitchen);
 
         FirebaseAuth fAuth;
@@ -67,12 +69,14 @@ public class HomeMakerKitchen extends AppCompatActivity {
         String Kitchen_name =kitchen_name.getText().toString().trim();
         String Kitchen_desc =desc.getText().toString().trim();
         String Kitchen_style =food_style.getText().toString().trim();
-        String Kitchen_address =food_style.getText().toString().trim();
+        String Kitchen_address =kitchen_address.getText().toString().trim();
+        String kitchen_phone =phone_number.getText().toString().trim();
+
         FirebaseDatabase rootNode;
         DatabaseReference reference;
         rootNode=FirebaseDatabase.getInstance();
         reference=rootNode.getReference("kitchen");
-        Kitchen_Newid_helper helperClass=new Kitchen_Newid_helper(Kitchen_name,Kitchen_desc,Kitchen_style,Kitchen_address,fAuth.getCurrentUser().getUid());
+        Kitchen_Newid_helper helperClass=new Kitchen_Newid_helper(Kitchen_name,Kitchen_desc,Kitchen_style,Kitchen_address,kitchen_phone,fAuth.getCurrentUser().getUid());
         reference.child(user_id).setValue(helperClass);
 
         startActivity(new Intent(getApplicationContext(),KitchenFood.class));

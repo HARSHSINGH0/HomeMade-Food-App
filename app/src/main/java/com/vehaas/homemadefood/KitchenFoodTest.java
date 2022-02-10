@@ -1,3 +1,5 @@
+
+
 package com.vehaas.homemadefood;
 
 import androidx.annotation.NonNull;
@@ -30,7 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class KitchenFood extends AppCompatActivity {
+public class KitchenFoodTest extends AppCompatActivity {
     private EditText searchFoodEt;
     private ImageButton filterFoodBtn;
     private TextView filterFoodTv;
@@ -42,16 +44,14 @@ public class KitchenFood extends AppCompatActivity {
     private FirebaseAuth fAuth;
     private ProgressDialog progressDialog;
     private RelativeLayout foodTabRL;
-//    private RelativeLayout ordersTabRL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_kitchen_food);
+        setContentView(R.layout.activity_kitchen_food_test);
         tabFood=findViewById(R.id.tabFood);
         tabOrder=findViewById(R.id.tabOrder);
         foodTabRL=findViewById(R.id.foodTabRL);
-//        ordersTabRL=findViewById(R.id.ordersTabRL);
 
         searchFoodEt=findViewById(R.id.searchFoodEt);
         filterFoodBtn=findViewById(R.id.filterFoodBtn);
@@ -104,7 +104,7 @@ public class KitchenFood extends AppCompatActivity {
         filterFoodBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder=new AlertDialog.Builder(KitchenFood.this);
+                AlertDialog.Builder builder=new AlertDialog.Builder(KitchenFoodTest.this);
                 builder.setTitle("Choose Timing:")
                         .setItems(Constants.foodTiming, new DialogInterface.OnClickListener() {
                             @Override
@@ -126,7 +126,7 @@ public class KitchenFood extends AppCompatActivity {
     private void loadFilteredFood(String selected) {
         foodList=new ArrayList<>();
         //get all products
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("kitchen");
+        DatabaseReference reference= FirebaseDatabase.getInstance().getReference("kitchen");
         reference.child(fAuth.getUid()).child("foods")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -142,7 +142,7 @@ public class KitchenFood extends AppCompatActivity {
 
                         }
                         //setup adapter
-                        adapterFoodSeller=new AdapterFoodSeller(KitchenFood.this,foodList);
+                        adapterFoodSeller=new AdapterFoodSeller(KitchenFoodTest.this,foodList);
                         //set adapter
                         foodRv.setAdapter(adapterFoodSeller);
                     }
@@ -169,7 +169,7 @@ public class KitchenFood extends AppCompatActivity {
 
                         }
                         //setup adapter
-                        adapterFoodSeller=new AdapterFoodSeller(KitchenFood.this,foodList);
+                        adapterFoodSeller=new AdapterFoodSeller(KitchenFoodTest.this,foodList);
                         //set adapter
                         foodRv.setAdapter(adapterFoodSeller);
                     }
@@ -185,7 +185,7 @@ public class KitchenFood extends AppCompatActivity {
     private void showFoodTabUI() {
 
         //show products ui and hide orders ui
-        foodTabRL.setVisibility(View.VISIBLE);
+//        foodTabRL.setVisibility(View.VISIBLE);
         Log.d("TAG", "showFoodTabUI: this is working");
 //        ordersTabRL.setVisibility(View.GONE);
         tabFood.setTextColor(getResources().getColor(R.color.black));
@@ -195,7 +195,7 @@ public class KitchenFood extends AppCompatActivity {
     }
     private void showOrderTabUI() {
         //show order ui and hide food ui
-        foodTabRL.setVisibility(View.GONE);
+//        foodTabRL.setVisibility(View.GONE);
 //        ordersTabRL.setVisibility(View.VISIBLE);
         tabFood.setTextColor(getResources().getColor(R.color.white));
         tabFood.setBackgroundColor(getResources().getColor(android.R.color.transparent));

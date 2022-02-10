@@ -1,86 +1,149 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".KitchenFood"
-    android:layout_margin="10dp"
+    android:layout_marginBottom="10dp"
+
     >
-
-    <TextView
-        android:id="@+id/kitchenFoodTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="@font/acme"
-        android:text="Kitchen Food"
-        android:textSize="30sp" />
-
+    <!--toolbar-->
     <RelativeLayout
+        android:id="@+id/toolbar_page"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/firstRelative2"
-        android:layout_below="@+id/kitchenFoodTxt">
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            >
+        android:layout_height="130dp"
+        android:layout_marginTop="-50dp"
+        android:background="@drawable/shape_header">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="50dp"
+            android:layout_marginTop="75dp"
+            android:background="@drawable/shape_rec02"
+            android:orientation="horizontal"
 
+
+            >
+            <!--        products-->
+            <TextView
+                android:id="@+id/tabFood"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/shape_rect01"
+                android:fontFamily="@font/baloo_thambi"
+                android:gravity="center"
+                android:text="kitchen Food"
+
+                android:textColor="@color/black"
+                android:textSize="25sp"
+
+                />
+            <!--        order-->
+            <TextView
+                android:id="@+id/tabOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:fontFamily="@font/baloo_thambi"
+                android:gravity="center"
+                android:text="Order"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
         </LinearLayout>
-        </ScrollView>
-
-
     </RelativeLayout>
-
-
+<!--    food tab-->
 
 
         <RelativeLayout
-            android:id="@+id/firstRelative2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="10dp">
-
-            <Button
-                android:id="@+id/checkOrderButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/black"
-                android:fontFamily="@font/acme"
-                android:text="Check Orders"
-                android:onClick="check_order_button"
-
-                android:textSize="20dp" />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/floatingActionButton"
-                android:layout_width="188dp"
+            android:id="@+id/foodTabRL"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="1dp"
+            android:layout_below="@+id/toolbar_page">
+            <!--            SearchView-->
+            <EditText
+                android:id="@+id/searchFoodEt"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
-
                 android:layout_marginBottom="5dp"
-                android:layout_toRightOf="@+id/checkOrderButton"
-                android:layout_weight="1"
-                android:backgroundTint="@color/activeBottomNavIconColor2"
-                android:clickable="true"
-                android:onClick="create_Kitchen_food_button"
-                app:srcCompat="@android:drawable/ic_input_add" />
+
+                android:background="@drawable/shape_rect03"
+                android:drawableStart="@drawable/ic_baseline_search_gray"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/baloo_thambi"
+                android:hint="Search"
+                android:padding="10dp" /><!--                android:layout_toStartOf="@+id/filterFoodBtn"-->
+            <!--            filter-->
+            <ImageButton
+                android:id="@+id/filterFoodBtn"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_baseline_filter" />-->
+            <!--            show filtered food name-->
+            <TextView
+                android:id="@+id/filterFoodTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/searchFoodEt"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/baloo_thambi"
+                android:text="Showing All" />
+            <!--            Recyclerview:show products-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/foodRv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/filterFoodTv"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="5dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/row_food_seller" />
+
+            <RelativeLayout
+                android:id="@+id/orderTabRL"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="1dp">
+
+            </RelativeLayout>
+
         </RelativeLayout>
+<!--    orders-->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        android:onClick="add_food_button"
+        app:srcCompat="@drawable/ic_baseline_add_circle_outline_24" />
 
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/activeBottomNavIconColor2"
+        android:clickable="true"
+        android:onClick="add_food_button_back"
+        app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
 </RelativeLayout>
