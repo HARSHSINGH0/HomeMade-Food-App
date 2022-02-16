@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--toolbar-->
+    <RelativeLayout
+        android:id="@+id/toolbarRl"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_marginTop="-50dp"
+        android:background="@drawable/shape_header">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp">
+
+            <ImageButton
+                android:id="@+id/editButtonIb"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:layout_toLeftOf="@+id/deleteButtonTb"
+                android:background="@null"
+                android:src="@drawable/ic_baseline_edit_24" />
+
+            <ImageButton
+                android:id="@+id/deleteButtonTb"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@null"
+
+                android:src="@drawable/ic_baseline_delete_24" />
+
+            <TextView
+                android:id="@+id/foodDetailTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/baloo_thambi"
+                android:text="Food Details"
+
+                android:textColor="@color/activeBottomNavIconColor2"
+                android:textSize="25sp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+    <!--    ImageLogo-->
+    <ImageView
+        android:id="@+id/imageFoodIm"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/toolbarRl"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-30dp"
+        android:background="@drawable/shape_header"
+        android:padding="10dp"
+        android:src="@drawable/ic_baseline_fastfood_24" />
+    <TextView
+        android:id="@+id/foodNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageFoodIm"
+        android:textSize="20sp"
+        android:fontFamily="@font/baloo_thambi"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/activeBottomNavIconColor2"
+
+        android:text="Food name"/>
+    <TextView
+        android:id="@+id/foodDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/foodNameTv"
+        android:textSize="15sp"
+        android:fontFamily="@font/baloo_thambi"
+        android:layout_marginLeft="10dp"
+        android:text="Description"/>
+    <TextView
+        android:id="@+id/timingFoodTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/foodDesc"
+        android:textSize="15sp"
+        android:fontFamily="@font/baloo_thambi"
+        android:layout_marginLeft="10dp"
+        android:text="Timing"/>
+    <TextView
+        android:id="@+id/stockRemainingTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timingFoodTv"
+        android:textSize="15sp"
+        android:fontFamily="@font/baloo_thambi"
+        android:layout_marginLeft="10dp"
+        android:text="Stock Remaining"/>
+
+    <TextView
+        android:id="@+id/priceTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageFoodIm"
+        android:layout_toRightOf="@+id/priceTvtitle"
+        android:fontFamily="@font/baloo_thambi"
+        android:text="Price"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/priceTvtitle"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageFoodIm"
+        android:layout_toRightOf="@+id/foodNameTv"
+        android:fontFamily="@font/baloo_thambi"
+        android:text=" ₹"
+        android:textSize="20sp" />
+
+</RelativeLayout>

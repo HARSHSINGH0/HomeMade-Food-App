@@ -1,13 +1,11 @@
 package com.vehaas.homemadefood;
 
-import androidx.activity.OnBackPressedDispatcherOwner;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -18,19 +16,14 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -45,23 +38,22 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
-import java.net.URI;
-import java.util.ArrayList;
 import java.util.HashMap;
 
-public class KitchenOrders extends AppCompatActivity{
+public class EditFoodActivity extends AppCompatActivity {
+    private String foodId;
     //ui views
     private ImageView img_fdimg;
     private EditText edt_fdname,edt_fdDesc,fdStyle,fdStock,fdPrice;
     private Spinner spinner_food_timing_activity;
-    private Button add_food_button;
+    private Button update_food_btn;
+
 
     //permission constants
-    private static  final int  CAMERA_REQUEST_CODE=200;
-    private static  final int  STORAGE_REQUEST_CODE=300;
+    private static final int  CAMERA_REQUEST_CODE=200;
+    private static final int  STORAGE_REQUEST_CODE=300;
     //image pick constants
     private static final int IMAGE_PICK_GALLERY_CODE=400;
     private static final int IMAGE_PICK_CAMERA_CODE=500;
@@ -71,11 +63,10 @@ public class KitchenOrders extends AppCompatActivity{
     private Uri image_uri;
     private FirebaseAuth fAuth;
     private ProgressDialog progressDialog;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_kitchen_orders);
+        setContentView(R.layout.activity_edit_food);
         //init ui views
         img_fdimg=findViewById(R.id.img_fdimg);
         edt_fdname=findViewById(R.id.edt_fdname);
@@ -88,12 +79,14 @@ public class KitchenOrders extends AppCompatActivity{
                 R.array.food_timing_spinner, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_food_timing_activity.setAdapter(adapter);
-        add_food_button=findViewById(R.id.add_food_button);
+        update_food_btn=findViewById(R.id.update_food_btn);
 
         img_fdimg.setImageResource(R.drawable.ic_baseline_fastfood_24);
+        //get id of the product from intent
+        foodId=getIntent().getStringExtra("foodId");
 
         fAuth=FirebaseAuth.getInstance();
-
+        loadFoodDetails();//to set on views.
 
         //setup progress dialog
         progressDialog=new ProgressDialog(this);
@@ -104,8 +97,6 @@ public class KitchenOrders extends AppCompatActivity{
         cameraPermission=new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermission=new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
-        //
-
         img_fdimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,23 +104,63 @@ public class KitchenOrders extends AppCompatActivity{
                 showImagePickDialog();
             }
         });
-        add_food_button.setOnClickListener(new View.OnClickListener() {
+        update_food_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Flow:
                 //1) Input data
                 //2) validate data
-                //3) Add data to db
+                //3) update data to db
                 inputData();
             }
         });
-        //will add filter feature afterwards --harsh
+
 
     }
 
+    private void loadFoodDetails() {
+        DatabaseReference reference= FirebaseDatabase.getInstance().getReference("kitchen");
+        Log.d("TAG", "loadFoodDetails: "+fAuth.getUid());
+        reference.child(fAuth.getUid()).child("foods")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String foodId=""+snapshot.child("foodId").getValue();
+                        String foodName=""+snapshot.child("foodName").getValue();
+                        String foodDesc=""+snapshot.child("foodDesc").getValue();
+                        String dishStyle=""+snapshot.child("dishStyle").getValue();
+                        String foodQuantity=""+snapshot.child("foodQuantity").getValue();
+                        String foodIcon=""+snapshot.child("foodIcon").getValue();
+                        String originalPrice=""+snapshot.child("originalPrice").getValue();
+                        String timing=""+snapshot.child("timing").getValue();
+                        String timestamp=""+snapshot.child("timestamp").getValue();
+                        String userID=""+snapshot.child("userID").getValue();
+//                        Log.d("TAG", "onDataChange: "+foodName);
+                        //set data to views
+                        edt_fdname.setText(foodName);
+                        edt_fdDesc.setText(foodDesc);
+                        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getApplicationContext(),
+                                R.array.food_timing_spinner, android.R.layout.simple_spinner_item);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinner_food_timing_activity.setAdapter(adapter);
+                        fdPrice.setText(originalPrice);
+                        fdStock.setText(foodQuantity);
+                        try {
+                            Picasso.with(getApplicationContext()).load(foodIcon).placeholder(R.drawable.ic_baseline_fastfood_24).into(img_fdimg);
+                        }catch (Exception e){
+                            img_fdimg.setImageResource(R.drawable.ic_baseline_fastfood_24);
+                        }
 
 
 
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
 
     private String foodName,foodDesc,dishStyle,foodQuantity,originalPrice,timing;
 
@@ -162,56 +193,58 @@ public class KitchenOrders extends AppCompatActivity{
             Toast.makeText(this,"Price is required....",Toast.LENGTH_SHORT).show();
             return;//don't proceed further
         }
-        addFood();
+        updateFood();
 
     }
 
-    private void addFood() {
-        //3) Add data to db
-        progressDialog.setMessage("Adding Product.....");
+    private void updateFood() {
+        //show progress
+        progressDialog.setMessage("Updating food...");
         progressDialog.show();
-        final String timestamp=""+System.currentTimeMillis();
-        Log.d("TAG", "addFood: image_uri"+image_uri);
         if(image_uri==null){
             //upload without image
 
-            //setup data to uploadz
+            //setup data to upload
             HashMap<String,Object>hashMap=new HashMap<>();
-            hashMap.put("foodId",timestamp);
-            hashMap.put("foodName",foodName);
-            hashMap.put("foodDesc",foodDesc);
             hashMap.put("dishStyle",dishStyle);
+            hashMap.put("foodDesc",foodDesc);
+            hashMap.put("foodIcon","");
+
+            hashMap.put("foodName",foodName);
             hashMap.put("foodQuantity",foodQuantity);
-            hashMap.put("foodIcon","");//no image
             hashMap.put("originalPrice",originalPrice);
             hashMap.put("timing",timing);
-            hashMap.put("timestamp",timestamp);
-            hashMap.put("userID",fAuth.getUid());
-            //add data to db
+
+            //update to db
             DatabaseReference reference=FirebaseDatabase.getInstance().getReference("kitchen");
-            reference.child(fAuth.getUid()).child("foods").child(timestamp).setValue(hashMap)
+
+            reference.child(fAuth.getUid().toString()).child("foods").child(foodId).updateChildren(hashMap)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             //added to db
+                            Log.d("TAG", "updateFood: this is running1");
                             progressDialog.dismiss();
-                            Toast.makeText(KitchenOrders.this,"Product added...",Toast.LENGTH_SHORT).show();
-                            clearData();
+                            Log.d("TAG", "updateFood: this is running2");
+                            Toast.makeText(EditFoodActivity.this,"Product added...",Toast.LENGTH_SHORT).show();
+                            Log.d("TAG", "updateFood: this is running3");
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     //failed adding to db
                     progressDialog.dismiss();
-                    Toast.makeText(KitchenOrders.this,""+e.getMessage(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditFoodActivity.this,""+e.getMessage(),Toast.LENGTH_SHORT).show();
                 }
             });
+
         }
-        else{
+        else {
+            //update with image
             //upload with image
             //first upload image to storage
             //name and path of image to be uploaded
-            String filePathAndName="food_images/"+""+timestamp;
+            String filePathAndName="food_images/"+""+foodId;
             StorageReference storageReference= FirebaseStorage.getInstance().getReference(filePathAndName);
             storageReference.putFile(image_uri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -226,7 +259,7 @@ public class KitchenOrders extends AppCompatActivity{
                                 //url of image received,upload to db
                                 //setup data to upload
                                 HashMap<String,Object> hashMap=new HashMap<>();
-                                hashMap.put("foodId",""+timestamp);
+                                hashMap.put("foodId",""+foodId);
                                 hashMap.put("foodName",""+foodName);
                                 hashMap.put("foodDesc",""+foodDesc);
                                 hashMap.put("dishStyle",""+dishStyle);
@@ -235,43 +268,30 @@ public class KitchenOrders extends AppCompatActivity{
                                 hashMap.put("foodIcon",""+downloadImageUri);//no image, set empty
                                 hashMap.put("originalPrice",""+originalPrice);
                                 hashMap.put("timing",""+timing);
-                                hashMap.put("timestamp",""+timestamp);
                                 hashMap.put("userID",""+fAuth.getUid());
                                 // add to db
                                 DatabaseReference reference=FirebaseDatabase.getInstance().getReference("kitchen");
-                                reference.child(fAuth.getUid()).child("foods").child(timestamp).setValue(hashMap)
+                                reference.child(fAuth.getUid()).child("foods").child(foodId).setValue(hashMap)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
                                                 //added to db
                                                 progressDialog.dismiss();
-                                                Toast.makeText(KitchenOrders.this,"Product added...",Toast.LENGTH_SHORT).show();
-                                                clearData();
+                                                Toast.makeText(EditFoodActivity.this,"Updated...",Toast.LENGTH_SHORT).show();
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
                                         //failed adding to db
                                         progressDialog.dismiss();
-                                        Toast.makeText(KitchenOrders.this,""+e.getMessage(),Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(EditFoodActivity.this,""+e.getMessage(),Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }
 
                         }
                     });
-
         }
-    }
-    private void clearData(){
-        //clear data after uploading product
-        edt_fdname.setText("");
-        edt_fdDesc.setText("");
-        fdStyle.setText("");
-        fdStock.setText("");
-        fdPrice.setText("");
-        img_fdimg.setImageResource(R.drawable.ic_baseline_fastfood_24);
-        image_uri=null;
     }
 
     private void showImagePickDialog() {
@@ -397,13 +417,4 @@ public class KitchenOrders extends AppCompatActivity{
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
-
-    public void add_food_button(View view) {
-
-    }
-
-    public void backbutton_aftk(View view) {
-        startActivity(new Intent(getApplicationContext(),KitchenFood.class));
-    }
-
 }

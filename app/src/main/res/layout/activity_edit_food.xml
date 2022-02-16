@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditFoodActivity"
+    android:layout_margin="10dp">
+
+    <RelativeLayout
+        android:id="@+id/firstRelativeADFTK"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:id="@+id/txt_addFoodToKitchen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/baloo_thambi"
+            android:text="Edit Food"
+            android:textColor="@color/activeBottomNavIconColor2"
+            android:textSize="30sp" />
+
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_toLeftOf="@+id/txt_addFoodToKitchen"
+            android:background="@null"
+            android:onClick="backbutton_aftk"
+            android:src="?attr/actionModeCloseDrawable" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/firstRelativeADFTK"
+        android:layout_marginTop="40sp">
+
+        <ImageView
+            android:id="@+id/img_fdimg"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true" />
+
+        <EditText
+            android:id="@+id/edt_fdname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_fdimg"
+            android:drawableStart="@android:drawable/star_big_on"
+            android:hint="Food Name e.g. Cooked Rice" />
+
+        <EditText
+            android:id="@+id/edt_fdDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edt_fdname"
+            android:drawableStart="@android:drawable/star_big_on"
+            android:hint="Food Description" />
+
+        <EditText
+
+            android:id="@+id/fdStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edt_fdDesc"
+            android:drawableStart="@android:drawable/star_big_on"
+            android:hint="Dish Style" />
+
+        <EditText
+
+            android:id="@+id/fdStock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fdStyle"
+            android:drawableStart="@drawable/ic_baseline_shopping_cart_24"
+            android:hint="Quantity or Limit of Stock"
+            android:inputType="number" />
+
+        <EditText
+
+            android:id="@+id/fdPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fdStock"
+            android:drawableStart="@android:drawable/star_big_on"
+            android:hint="Price of one unit "
+            android:inputType="numberDecimal" />
+
+
+        <TextView
+            android:id="@+id/txt_fdTiming"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fdPrice"
+            android:fontFamily="@font/acme"
+            android:text="Order Timing :"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/spinner_food_timing_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fdPrice"
+            android:layout_toRightOf="@+id/txt_fdTiming"
+            android:isScrollContainer="true" />
+
+        <Button
+            android:id="@+id/update_food_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/spinner_food_timing_activity"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@color/black"
+            android:onClick="update_food_button"
+            android:text="Update Food" />
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

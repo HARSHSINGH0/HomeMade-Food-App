@@ -62,7 +62,6 @@ public class KitchenFood extends AppCompatActivity {
         fAuth=FirebaseAuth.getInstance();
 
         loadAllFood();
-        Log.d("TAG", "onCreate: before showFoodTabUI button it is working");
         showFoodTabUI();
         searchFoodEt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -133,7 +132,7 @@ public class KitchenFood extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         //before getting reset list
                         for (DataSnapshot ds:dataSnapshot.getChildren()){
-                            String foodTiming=""+ds.child("foodTiming").getValue();
+                            String foodTiming=""+ds.child("timing").getValue();
                             if(selected.equals(foodTiming)){
                                 ModelFood modelFood=ds.getValue(ModelFood.class);
                                 foodList.add(modelFood);
@@ -186,7 +185,6 @@ public class KitchenFood extends AppCompatActivity {
 
         //show products ui and hide orders ui
         foodTabRL.setVisibility(View.VISIBLE);
-        Log.d("TAG", "showFoodTabUI: this is working");
 //        ordersTabRL.setVisibility(View.GONE);
         tabFood.setTextColor(getResources().getColor(R.color.black));
         tabFood.setBackgroundResource(R.drawable.shape_rect01);
