@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Kitchen_order_requests"
+    tools:context=".activities.Kitchen_order_requests"
     android:layout_margin="10dp">
 
     <TextView

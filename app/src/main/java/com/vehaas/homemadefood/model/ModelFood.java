@@ -1,4 +1,4 @@
-package com.vehaas.homemadefood;
+package com.vehaas.homemadefood.model;
 
 public class ModelFood {
     private String foodId,foodName,foodDesc,dishStyle,foodQuantity,foodIcon,originalPrice,timing,timestamp,userID;

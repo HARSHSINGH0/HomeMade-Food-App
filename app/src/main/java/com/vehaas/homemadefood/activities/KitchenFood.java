@@ -1,23 +1,19 @@
-package com.vehaas.homemadefood;
+package com.vehaas.homemadefood.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.MediaRouteButton;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -27,6 +23,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.vehaas.homemadefood.adapter.AdapterFoodSeller;
+import com.vehaas.homemadefood.Constants;
+import com.vehaas.homemadefood.model.ModelFood;
+import com.vehaas.homemadefood.R;
 
 import java.util.ArrayList;
 
@@ -202,10 +202,10 @@ public class KitchenFood extends AppCompatActivity {
     }
 
     public void add_food_button(View view) {
-        startActivity(new Intent(getApplicationContext(),KitchenOrders.class));
+        startActivity(new Intent(getApplicationContext(), KitchenOrders.class));
     }
 
     public void add_food_button_back(View view) {
-        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
     }
 }

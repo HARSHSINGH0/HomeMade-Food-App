@@ -1,8 +1,9 @@
 package com.vehaas.homemadefood;
 
-import android.widget.ArrayAdapter;
 import android.widget.Filter;
-import android.widget.Filterable;
+
+import com.vehaas.homemadefood.adapter.AdapterFoodSeller;
+import com.vehaas.homemadefood.model.ModelFood;
 
 import java.util.ArrayList;
 

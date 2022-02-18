@@ -1,23 +1,19 @@
-package com.vehaas.homemadefood;
+package com.vehaas.homemadefood.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.vehaas.homemadefood.R;
 
 public class MainActivity extends AppCompatActivity{
     @Override
@@ -115,7 +111,7 @@ public class MainActivity extends AppCompatActivity{
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent(getApplicationContext(),HomeMakerKitchen.class));
+                startActivity(new Intent(getApplicationContext(), HomeMakerKitchen.class));
                 dialog.dismiss();
 
             }

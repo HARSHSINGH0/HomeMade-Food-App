@@ -1,17 +1,11 @@
-package com.vehaas.homemadefood;
+package com.vehaas.homemadefood.adapter;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageButton;
@@ -24,12 +18,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
+import com.vehaas.homemadefood.FilterFood;
+import com.vehaas.homemadefood.R;
+import com.vehaas.homemadefood.activities.EditFoodActivity;
+import com.vehaas.homemadefood.activities.KitchenFood;
+import com.vehaas.homemadefood.model.ModelFood;
 
 import java.util.ArrayList;
 
@@ -141,7 +139,7 @@ public class AdapterFoodSeller extends RecyclerView.Adapter<AdapterFoodSeller.Ho
                 //open edit product acitvity,pass id of food
                 bottomSheetDialog.dismiss();
                 Log.d("TAG", "onClick: id: "+id);
-                Intent intent=new Intent(context,EditFoodActivity.class);
+                Intent intent=new Intent(context, EditFoodActivity.class);
                 intent.putExtra("foodId",id);
                 context.startActivity(intent);
             }
@@ -172,7 +170,7 @@ public class AdapterFoodSeller extends RecyclerView.Adapter<AdapterFoodSeller.Ho
 //                });
                 deletefood(id);
                 bottomSheetDialog.dismiss();
-                Intent intent=new Intent(context,KitchenFood.class);
+                Intent intent=new Intent(context, KitchenFood.class);
                 context.startActivity(intent);
             }
         });

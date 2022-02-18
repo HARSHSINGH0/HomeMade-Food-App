@@ -21,16 +21,16 @@
         android:theme="@style/Theme.HomeMadeFood"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".EditFoodActivity"
+            android:name=".activities.EditFoodActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeMakerKitchen"
+            android:name=".activities.HomeMakerKitchen"
             android:exported="false" />
-        <activity android:name=".KitchenOrders" />
-        <activity android:name=".Kitchen_order_requests" />
-        <activity android:name=".KitchenFood" />
+        <activity android:name=".activities.KitchenOrders" />
+        <activity android:name=".activities.Kitchen_order_requests" />
+        <activity android:name=".activities.KitchenFood" />
         <activity
-            android:name=".SignupFragment"
+            android:name=".activities.SignupFragment"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,8 +38,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".LoginFragment" />
+        <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.LoginFragment" />
 
         <meta-data
             android:name="preloaded_fonts"
