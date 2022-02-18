@@ -69,10 +69,10 @@ public class AdapterFoodSeller extends RecyclerView.Adapter<AdapterFoodSeller.Ho
         holder.quantityTv.setText(quantity);
         holder.orignalPriceTv.setText(orignalPrice);
         try {
-            Picasso.with(context.getApplicationContext()).load(icon).placeholder(R.drawable.ic_baseline_shopping_cart_24).into(holder.foodImgIv);//this line can be error
+            Picasso.with(context.getApplicationContext()).load(icon).placeholder(R.drawable.ic_baseline_fastfood_24).into(holder.foodImgIv);//this line can be error
         }
         catch (Exception e){
-            holder.foodImgIv.setImageResource(R.drawable.ic_baseline_shopping_cart_24);
+            holder.foodImgIv.setImageResource(R.drawable.ic_baseline_fastfood_24);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener(){
 

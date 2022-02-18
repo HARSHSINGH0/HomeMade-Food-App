@@ -1,18 +1,28 @@
 package com.vehaas.homemadefood.model;
 
 public class ModelKitchen {
+    private String kitchen_desc;
     private String uid,name,Kitchen_name,kitchen_phone,Kitchen_style,Kitchen_address;
 
     public ModelKitchen() {
     }
 
-    public ModelKitchen(String uid, String name, String kitchen_name, String kitchen_phone, String kitchen_style, String kitchen_address) {
+    public ModelKitchen(String uid, String name, String kitchen_name, String kitchen_phone, String kitchen_style, String kitchen_address,String kitchen_desc) {
         this.uid = uid;
         this.name = name;
-        Kitchen_name = kitchen_name;
+        this.Kitchen_name = kitchen_name;
         this.kitchen_phone = kitchen_phone;
-        Kitchen_style = kitchen_style;
-        Kitchen_address = kitchen_address;
+        this.Kitchen_style = kitchen_style;
+        this.Kitchen_address = kitchen_address;
+        this.kitchen_desc=kitchen_desc;
+    }
+
+    public String getKitchen_desc() {
+        return kitchen_desc;
+    }
+
+    public void setKitchen_desc(String kitchen_desc) {
+        this.kitchen_desc = kitchen_desc;
     }
 
     public String getUid() {
