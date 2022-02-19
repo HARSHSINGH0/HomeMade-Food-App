@@ -73,6 +73,7 @@ public class AdapterKitchen extends RecyclerView.Adapter<AdapterKitchen.HolderKi
             kitchenNameTv=itemView.findViewById(R.id.kitchenNameTv);
             phoneTv=itemView.findViewById(R.id.phoneTv);
             addressTv=itemView.findViewById(R.id.addressTv);
+            
         }
     }
 }
