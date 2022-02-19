@@ -2,19 +2,21 @@ package com.vehaas.homemadefood.model;
 
 public class ModelKitchen {
     private String kitchen_desc;
-    private String uid,name,Kitchen_name,kitchen_phone,Kitchen_style,Kitchen_address;
+    private String kitchen_userId,Kitchen_name,kitchen_phone,Kitchen_style,Kitchen_address;
 
     public ModelKitchen() {
     }
 
-    public ModelKitchen(String uid, String name, String kitchen_name, String kitchen_phone, String kitchen_style, String kitchen_address,String kitchen_desc) {
-        this.uid = uid;
-        this.name = name;
+
+
+    public ModelKitchen(String kitchen_desc, String kitchen_userId, String kitchen_name, String kitchen_phone, String kitchen_style, String kitchen_address, String kitchen_style1) {
+        this.kitchen_desc = kitchen_desc;
+        this.kitchen_userId = kitchen_userId;
         this.Kitchen_name = kitchen_name;
         this.kitchen_phone = kitchen_phone;
         this.Kitchen_style = kitchen_style;
         this.Kitchen_address = kitchen_address;
-        this.kitchen_desc=kitchen_desc;
+        this.Kitchen_style = "Food styel"+kitchen_style1;
     }
 
     public String getKitchen_desc() {
@@ -25,20 +27,12 @@ public class ModelKitchen {
         this.kitchen_desc = kitchen_desc;
     }
 
-    public String getUid() {
-        return uid;
+    public String getKitchen_userId() {
+        return kitchen_userId;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setKitchen_userId(String kitchen_userId) {
+        this.kitchen_userId = kitchen_userId;
     }
 
     public String getKitchen_name() {

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.KitchenDetailsActivity">
+<!--    kitchen details-->
+    <RelativeLayout
+        android:id="@+id/kitchenRl"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp">
+
+        <ImageView
+            android:id="@+id/kitchenIv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_logolauncher_foreground" />
+
+<!--        <ImageView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:src="@mipmap/ic_logolauncher_foreground" />-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/kitchenNameTv"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="3dp"
+                android:fontFamily="@font/baloo_thambi"
+                android:shadowColor="@color/white"
+                android:shadowRadius="3"
+                android:text="Kitchen Name"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/phoneTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/kitchenNameTv"
+                android:layout_marginStart="3dp"
+                android:fontFamily="@font/baloo_thambi"
+                android:shadowColor="@color/white"
+                android:shadowRadius="3"
+                android:text="Phone"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/addressTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/phoneTv"
+                android:layout_marginStart="3dp"
+                android:fontFamily="@font/baloo_thambi"
+                android:shadowColor="@color/white"
+                android:shadowRadius="3"
+                android:text="Address"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/styleTv"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/kitchenNameTv"
+                android:layout_marginStart="10dp"
+                android:layout_toRightOf="@+id/phoneTv"
+                android:fontFamily="@font/baloo_thambi"
+                android:shadowColor="@color/white"
+                android:shadowRadius="3"
+                android:text="Food Style"
+                android:textColor="@color/black" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/kitchenNameTv"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="93dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/callBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_baseline_call_24" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </RelativeLayout>
+<!--    toolbar-->
+    <RelativeLayout
+        android:id="@+id/toolbarRl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/shape_rect01"
+        android:padding="10dp">
+
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:src="@drawable/ic_baseline_arrow_back_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/baloo_thambi"
+            android:text="Kitchen Details"
+            android:textColor="@color/InactiveBottomNavIconColor2"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/foodRl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/kitchenRl">
+        <!--        search-->
+        <EditText
+            android:id="@+id/searchFoodEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_rect01"
+            android:drawableStart="@drawable/ic_baseline_search_gray"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/baloo_thambi"
+            android:hint="Search Food"
+
+            android:padding="10dp" />
+        <!--        filter-->
+        <ImageButton
+            android:id="@+id/filterFoodBtn1"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="5dp"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_baseline_filter" />
+        <!--        show filtered food title-->
+        <TextView
+            android:id="@+id/filteredFoodTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/searchFoodEt"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/baloo_thambi"
+            android:text="Showing All"
+            android:textColor="@color/black" />
+        <!--            Recyclerview-show foods-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/foodsRv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/filteredFoodTv"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/row_food_seller" />
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -101,7 +101,6 @@ public class HomeFragment extends Fragment {
                 kitchensList.clear();
                 for(DataSnapshot ds: snapshot.getChildren()){
                     ModelKitchen modelKitchen=ds.getValue(ModelKitchen.class);
-                    Log.d("TAG", "onDataChange: "+modelKitchen);
                     kitchensList.add(modelKitchen);
                 }
                 adapterKitchen=new AdapterKitchen(getContext(),kitchensList);

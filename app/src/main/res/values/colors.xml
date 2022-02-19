@@ -12,5 +12,7 @@
     <color name="activeBottomNavIconColor">#FFF05434</color>
     <color name="activeBottomNavIconColor2">#F85F40</color>
     <color name="linkblue">#2F79B3</color>
+    <color name="orangy_yellow">#FF9800</color>
+    <color name="graylight">#C6C3BF</color>
 
 </resources>

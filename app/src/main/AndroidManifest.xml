@@ -21,6 +21,9 @@
         android:theme="@style/Theme.HomeMadeFood"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activities.KitchenDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.EditFoodActivity"
             android:exported="false" />
         <activity
