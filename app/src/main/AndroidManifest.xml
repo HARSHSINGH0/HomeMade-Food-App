@@ -22,7 +22,10 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".activities.KitchenDetailsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateHidden"/>
+<!--            hide keyboard by default-->
+
         <activity
             android:name=".activities.EditFoodActivity"
             android:exported="false" />
