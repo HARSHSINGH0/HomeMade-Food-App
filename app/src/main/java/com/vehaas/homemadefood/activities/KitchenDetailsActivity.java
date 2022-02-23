@@ -7,12 +7,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.media.MediaMetadataCompat;
 import android.text.Editable;
+import android.text.Layout;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -27,17 +32,26 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.vehaas.homemadefood.Constants;
 import com.vehaas.homemadefood.R;
+import com.vehaas.homemadefood.adapter.AdapterCartItem;
 import com.vehaas.homemadefood.adapter.AdapterFoodSeller;
 import com.vehaas.homemadefood.adapter.AdapterFoodUser;
 import com.vehaas.homemadefood.adapter.AdapterKitchen;
+import com.vehaas.homemadefood.model.ModelCartItem;
 import com.vehaas.homemadefood.model.ModelFood;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+import p32929.androideasysql_library.Column;
+import p32929.androideasysql_library.EasyDB;
+
 public class KitchenDetailsActivity extends AppCompatActivity {
+
+
     //declare ui views
-    private TextView kitchenNameTv,phoneTv,addressTv,filteredFoodTv,kitchenstyleTv,addToCartTv;
-    private ImageButton backBtn,callBtn;
+    private TextView kitchenNameTv,phoneTv,addressTv,filteredFoodTv,kitchenstyleTv;
+    private ImageButton backBtn,callBtn,cartBtn;
     private EditText searchFoodEt;
     private ImageButton filterFoodBtn;
     private RecyclerView foodsRv;
@@ -47,6 +61,11 @@ public class KitchenDetailsActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private ArrayList<ModelFood> foodsList;
     private AdapterFoodUser adapterFoodUser;
+
+    //cart
+    private ArrayList<ModelCartItem> cartItemList;
+    private AdapterCartItem adapterCartItem;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,12 +81,17 @@ public class KitchenDetailsActivity extends AppCompatActivity {
         filterFoodBtn=findViewById(R.id.filterFoodBtn1);
         filteredFoodTv=findViewById(R.id.filteredFoodTv);
         foodsRv=findViewById(R.id.foodsRv);
+        cartBtn=findViewById(R.id.cartBtn);
 
         //get uid of the kitchen from intent
         kitchenUid=getIntent().getStringExtra("kitchenID");
         firebaseAuth=FirebaseAuth.getInstance();
         loadKitchenDetails();
         loadKitchenFoods();
+
+        //each shop has its own foods and orders so if user add items to cart and go back and open cart in different shop then cart should be different
+        //so delete cart data whenever user open this activity
+        deleteCartData();
 
         searchFoodEt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -99,12 +123,15 @@ public class KitchenDetailsActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-//        addToCartTv.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });S
+        cartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //show cart
+                showCartDialog();
+            }
+        });
+
+
         callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -135,6 +162,89 @@ public class KitchenDetailsActivity extends AppCompatActivity {
         });
     }
 
+    private void deleteCartData() {
+        EasyDB easyDB=EasyDB.init(this,"ITEMS_DB")
+                .setTableName("ITEMS_TABLE")
+                .addColumn(new Column("Item_Id",new String[]{"text","unique"}))
+                .addColumn(new Column("Item_PID",new String[]{"text","not null"}))
+                .addColumn(new Column("Item_Name",new String[]{"text","not null"}))
+                .addColumn(new Column("Item_Price_Each",new String[]{"text","not null"}))
+                .addColumn(new Column("Item_Price",new String[]{"text","not null"}))
+                .addColumn(new Column("Item_Quantity",new String[]{"text","not null"}))
+                .doneTableColumn();
+        easyDB.deleteAllDataFromTable();//delete all records from cart
+    }
+
+    public double allTotalPrice=0.00;
+    //need to access these views in adapter so making public
+    public TextView sTotalTv;
+
+    private void showCartDialog() {
+        //init list
+        cartItemList=new ArrayList<>();
+
+        //inflate cart layout
+        View view= LayoutInflater.from(this).inflate(R.layout.dialog_cart,null);
+        //init views
+        TextView kitchenNameTv=view.findViewById(R.id.kitchenNameTv);
+        RecyclerView cartItemRv=view.findViewById(R.id.cartItemRv);
+        sTotalTv=view.findViewById(R.id.sTotalTv);
+        Button checkOutBtn=view.findViewById(R.id.checkOutBtn);
+
+        //dialog
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        //set view to dialog
+        builder.setView(view);
+        kitchenNameTv.setText(kitchenName);
+        EasyDB easyDB=EasyDB.init(this,"ITEMS_DB")
+                .setTableName("ITEMS_TABLE")
+                .addColumn(new Column("Item_Id",new String[]{"text","unique"}))
+                .addColumn(new Column("Item_PID",new String[]{"text","not null"}))
+                .addColumn(new Column("Item_Name",new String[]{"text","not null"}))
+                .addColumn(new Column("Item_Price_Each",new String[]{"text","not null"}))
+                .addColumn(new Column("Item_Price",new String[]{"text","not null"}))
+                .addColumn(new Column("Item_Quantity",new String[]{"text","not null"}))
+                .doneTableColumn();
+        //get all the records from db
+        Cursor res=easyDB.getAllData();
+        while (res.moveToNext()){
+            String id=res.getString(1);
+            String pId=res.getString(2);
+            String name=res.getString(3);
+            String price=res.getString(4);
+            String cost=res.getString(5);
+            String quantity=res.getString(6);
+            allTotalPrice=allTotalPrice+Double.parseDouble(cost);
+            ModelCartItem modelCartItem=new ModelCartItem(
+                    ""+id,
+                    ""+pId,
+                    ""+name,
+                    ""+price,
+                    ""+cost,
+                    ""+quantity);
+            cartItemList.add(modelCartItem);
+        }
+        //setup adapter
+        adapterCartItem=new AdapterCartItem(this,cartItemList);
+        //set to recyclerview
+        cartItemRv.setAdapter(adapterCartItem);
+
+        sTotalTv.setText("₹"+String.format("%.2f",allTotalPrice));
+        //reset total price on dismmis
+        AlertDialog dialog=builder.create();
+        dialog.show();
+        //reset total price on dialog dismmis
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                allTotalPrice=0.00;
+            }
+        });
+
+
+
+    }
+
     private void dialPhone() {
         startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+Uri.encode(kitchenPhone))));
         Toast.makeText(this,""+kitchenPhone,Toast.LENGTH_SHORT).show();
@@ -149,7 +259,6 @@ public class KitchenDetailsActivity extends AppCompatActivity {
                 kitchenName=""+snapshot.child("kitchen_name").getValue();
                 kitchenPhone=""+snapshot.child("kitchen_phone").getValue();
                 kitchenAddress=""+snapshot.child("kitchen_address").getValue();
-
                 kitchenStyle=""+snapshot.child("kitchen_style").getValue();
                 //set kitchen data
                 kitchenNameTv.setText(kitchenName);
@@ -176,7 +285,6 @@ public class KitchenDetailsActivity extends AppCompatActivity {
                         //clearing this list before adding item
                         foodsList.clear();
 
-                        Log.d("TAG", "loadKitchenFoods: this is running");
 
                         for(DataSnapshot ds:snapshot.getChildren()){
                             ModelFood modelFood=ds.getValue(ModelFood.class);

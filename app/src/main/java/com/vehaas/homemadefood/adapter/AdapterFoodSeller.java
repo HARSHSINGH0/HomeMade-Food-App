@@ -138,7 +138,6 @@ public class AdapterFoodSeller extends RecyclerView.Adapter<AdapterFoodSeller.Ho
             public void onClick(View view) {
                 //open edit product acitvity,pass id of food
                 bottomSheetDialog.dismiss();
-                Log.d("TAG", "onClick: id: "+id);
                 Intent intent=new Intent(context, EditFoodActivity.class);
                 intent.putExtra("foodId",id);
                 context.startActivity(intent);

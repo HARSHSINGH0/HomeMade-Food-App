@@ -125,7 +125,7 @@ public class AdapterFoodUser extends RecyclerView.Adapter<AdapterFoodUser.Holder
         titleTv.setText(""+foodName);
         descriptionTv.setText(""+foodDesc);
         orignalPriceTv.setText("₹"+originalPrice);
-        timingTv.setText(""+timing);
+        timingTv.setText("Food Timing: "+timing);
         finalPriceTv.setText(""+finalCost);
 
         AlertDialog dialog=builder.create();
@@ -157,12 +157,12 @@ public class AdapterFoodUser extends RecyclerView.Adapter<AdapterFoodUser.Holder
             @Override
             public void onClick(View view) {
                 String title=titleTv.getText().toString().trim();
-                String priceEach=orignalPriceTv.getText().toString().trim().replace("₹","");
-                String price=finalPriceTv.getText().toString().trim().replace("₹","");
+                String priceEach=price;
+                String totalprice=finalPriceTv.getText().toString().trim().replace("₹","");
                 String quantity=quantityTv.getText().toString().trim();
 
                 //add to db(SQlite)
-                addToCart(foodId,title,priceEach,price,quantity);
+                addToCart(foodId,title,priceEach,totalprice,quantity);
             }
         });
     }
@@ -180,7 +180,7 @@ public class AdapterFoodUser extends RecyclerView.Adapter<AdapterFoodUser.Holder
                 .addColumn(new Column("Item_Quantity",new String[]{"text","not null"}))
                 .doneTableColumn();
         Boolean b=easyDB.addData("Item_Id",itemId)
-                .addData("Item_Id",foodId)
+                .addData("Item_PID",foodId)
                 .addData("Item_Name",title)
                 .addData("Item_Price_Each",priceEach)
                 .addData("Item_Price",price)
