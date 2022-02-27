@@ -66,11 +66,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/firstRelative"
             android:id="@+id/switch_to_chef"
+            android:layout_centerHorizontal="true"
             >
 
             <TextView
                 android:padding="15dp"
                 android:id="@+id/switchtohomemaker"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/logouttext"
@@ -82,20 +84,7 @@
                 android:textSize="30sp" />
         </androidx.cardview.widget.CardView>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/switch_to_chef"
-            android:layout_marginTop="50dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/acme"
-                android:text="Orders"
-                android:textColor="@color/black"
-                android:textSize="30sp" />
-        </RelativeLayout>
 
 
     </RelativeLayout>

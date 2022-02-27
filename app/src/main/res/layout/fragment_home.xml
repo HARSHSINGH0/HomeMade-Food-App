@@ -34,6 +34,7 @@
             android:textSize="30sp" />
 
 
+
         <RelativeLayout
             android:id="@+id/toolbar_homePage"
             android:layout_width="match_parent"
@@ -84,7 +85,8 @@
         android:id="@+id/kitchenRl"
         android:layout_below="@+id/firstRelativehome"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/kitchenRv"
@@ -101,6 +103,13 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/firstRelativehome">
 
+<!--        recyclerview: Show orders-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ordersRv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/row_order_user" />
 
     </RelativeLayout>
 </RelativeLayout>

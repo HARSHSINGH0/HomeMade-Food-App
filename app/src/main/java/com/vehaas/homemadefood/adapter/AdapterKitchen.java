@@ -59,8 +59,8 @@ public class AdapterKitchen extends RecyclerView.Adapter<AdapterKitchen.HolderKi
         holder.kitchenNameTv.setText(""+kitchen_name);
         holder.phoneTv.setText("+91"+kitchen_phone);
         holder.addressTv.setText("Location:"+kitchen_address);
+
 //        Log.d("TAG", "onBindViewHolder: "+kitchen_style);
-        //holder.kitchenstyleTv.setText("Food Style:"+kitchen_style);
 
         //handle on click listener,show kitchen details
         holder.itemView.setOnClickListener(new View.OnClickListener() {

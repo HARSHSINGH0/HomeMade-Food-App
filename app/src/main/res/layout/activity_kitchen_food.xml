@@ -11,6 +11,7 @@
     <!--toolbar-->
     <RelativeLayout
         android:id="@+id/toolbar_page"
+
         android:layout_width="match_parent"
         android:layout_height="130dp"
         android:layout_marginTop="-50dp"
@@ -63,7 +64,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="1dp"
-            android:layout_below="@+id/toolbar_page">
+            android:layout_below="@+id/toolbar_page"
+            android:visibility="gone">
             <!--            SearchView-->
             <EditText
                 android:id="@+id/searchFoodEt"
@@ -90,7 +92,7 @@
                 android:layout_marginEnd="5dp"
                 android:background="@null"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_baseline_filter" />-->
+                android:src="@drawable/ic_baseline_access_time_24" />-->
             <!--            show filtered food name-->
             <TextView
                 android:id="@+id/filterFoodTv"
@@ -112,16 +114,52 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/row_food_seller" />
 
-            <RelativeLayout
-                android:id="@+id/orderTabRL"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="1dp">
 
-            </RelativeLayout>
 
         </RelativeLayout>
-<!--    orders-->
+<!--    ordersTab-->
+    <!--            SearchView-->
+    <RelativeLayout
+        android:id="@+id/orderTabRL"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar_page">
+
+        <TextView
+            android:id="@+id/filteredOrderTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toStartOf="@+id/filterOrderBtn"
+            android:background="@drawable/shape_rect01"
+            android:padding="10dp"
+            android:text="Showing All Order" />
+        <ImageButton
+            android:id="@+id/filterOrderBtn"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_baseline_access_time_24" />-->
+        <!--            show filtered food name-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ordersRv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/filteredOrderTv"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:reverseLayout="true"
+            app:stackFromEnd="true"
+            tools:listitem="@layout/row_order_seller" />
+    </RelativeLayout>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
@@ -132,6 +170,7 @@
         android:layout_marginBottom="10dp"
         android:clickable="true"
         android:onClick="add_food_button"
+        android:backgroundTint="@color/white"
         app:srcCompat="@drawable/ic_baseline_add_circle_outline_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -144,6 +183,7 @@
         android:layout_marginBottom="10dp"
         android:background="@color/activeBottomNavIconColor2"
         android:clickable="true"
+        android:backgroundTint="@color/white"
         android:onClick="add_food_button_back"
         app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
 </RelativeLayout>

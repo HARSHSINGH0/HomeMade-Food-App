@@ -76,11 +76,13 @@
                     android:id="@+id/timingFoodTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/orignalPriceTv"
                     android:text=" Lunch Timing"
                     android:textColor="@color/InactiveBottomNavIconColor2" />
 
                 <TextView
+
                     android:id="@+id/orignalPriceTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -91,12 +93,12 @@
             </RelativeLayout>
 
             <TextView
+                android:padding="5dp"
                 android:id="@+id/addToCartTv"
                 android:layout_width="wrap_content"
-
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_baseline_shopping_cart_24"
-                android:text="Add to cart "
+                android:text=" Add to cart "
                 android:textColor="@color/InactiveBottomNavIconColor2" />
 
         </LinearLayout>

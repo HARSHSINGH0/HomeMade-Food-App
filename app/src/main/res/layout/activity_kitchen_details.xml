@@ -81,7 +81,7 @@
                 android:fontFamily="@font/baloo_thambi"
                 android:shadowColor="@color/white"
                 android:shadowRadius="3"
-                android:text="Food Style"
+                android:text="Kitchen Style"
                 android:textColor="@color/black" />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -167,7 +167,7 @@
             android:layout_marginEnd="5dp"
             android:background="@null"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_baseline_filter" />
+            android:src="@drawable/ic_baseline_access_time_24" />
         <!--        show filtered food title-->
         <TextView
             android:id="@+id/filteredFoodTv"

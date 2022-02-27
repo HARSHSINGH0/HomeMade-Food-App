@@ -41,9 +41,9 @@ public class MainActivity extends AppCompatActivity{
                 case R.id.nav_account:
                     selectedFragment=new AccountFragment();
                     break;
-                case R.id.nav_cart:
-                    selectedFragment =new CartFragment();
-                    break;
+//                case R.id.nav_cart:
+//                    selectedFragment =new CartFragment();
+//                    break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + item.getItemId());
             }

@@ -58,14 +58,6 @@
                     android:text="Address"
                     android:textColor="@color/black" />
 
-                <TextView
-                    android:id="@+id/kitchenstyleTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:maxLines="1"
-                    android:text="Style"
-                    android:textColor="@color/black" />
         </LinearLayout>
 
         <ImageView

@@ -25,8 +25,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.vehaas.homemadefood.adapter.AdapterFoodSeller;
 import com.vehaas.homemadefood.Constants;
+import com.vehaas.homemadefood.adapter.AdapterOrderKitchen;
 import com.vehaas.homemadefood.model.ModelFood;
 import com.vehaas.homemadefood.R;
+import com.vehaas.homemadefood.model.ModelOrderKitchen;
 
 import java.util.ArrayList;
 
@@ -42,7 +44,14 @@ public class KitchenFood extends AppCompatActivity {
     private FirebaseAuth fAuth;
     private ProgressDialog progressDialog;
     private RelativeLayout foodTabRL;
-//    private RelativeLayout ordersTabRL;
+    private RelativeLayout orderTabRL;
+
+    //order
+    private TextView filteredOrderTv;
+    private ImageButton filterOrderBtn;
+    private RecyclerView ordersRv;
+    private ArrayList<ModelOrderKitchen> orderKitchenArrayList;
+    private AdapterOrderKitchen adapterOrderKitchen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,17 +60,19 @@ public class KitchenFood extends AppCompatActivity {
         tabFood=findViewById(R.id.tabFood);
         tabOrder=findViewById(R.id.tabOrder);
         foodTabRL=findViewById(R.id.foodTabRL);
-//        ordersTabRL=findViewById(R.id.ordersTabRL);
+        orderTabRL=findViewById(R.id.orderTabRL);
 
         searchFoodEt=findViewById(R.id.searchFoodEt);
         filterFoodBtn=findViewById(R.id.filterFoodBtn);
         filterFoodTv=findViewById(R.id.filterFoodTv);
         foodRv=findViewById(R.id.foodRv);
-
-
+        //order
+        filteredOrderTv=findViewById(R.id.filteredOrderTv);
+        filterOrderBtn=findViewById(R.id.filterOrderBtn);
+        ordersRv=findViewById(R.id.ordersRv);
         fAuth=FirebaseAuth.getInstance();
-
         loadAllFood();
+        loadAllOrders();
         showFoodTabUI();
         searchFoodEt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -121,7 +132,69 @@ public class KitchenFood extends AppCompatActivity {
                         }).show();
             }
         });
+        filterOrderBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //options to display in dialog
+                String[] options={"ALL","In Progress","Completed","Cancelled"};
+                //dialog
+                AlertDialog.Builder builder=new AlertDialog.Builder(KitchenFood.this);
+                builder.setTitle("Filter Orders:")
+                        .setItems(options, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //handle item clicks
+                                if(i==0){
+                                    //All clicked
+                                    filteredOrderTv.setText("Showing All Orders");
+                                    adapterOrderKitchen.getFilter().filter("");//show all orders
+                                }
+                                else{
+                                    String optionClicked=options[i];
+                                    filteredOrderTv.setText("Showing "+optionClicked+" Orders");//eg.showing completed orders
+                                    adapterOrderKitchen.getFilter().filter(optionClicked);
+                                }
+                            }
+                        })
+                        .show();
+            }
+        });
     }
+
+    private void loadAllOrders() {
+        //init array list
+        orderKitchenArrayList=new ArrayList<>();
+
+        //load orders of shop
+        DatabaseReference ref=FirebaseDatabase.getInstance().getReference("kitchen");
+        ref.child(fAuth.getUid()).child("orders")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        //clear list before adding new data in it
+                        orderKitchenArrayList.clear();
+                        for (DataSnapshot ds:snapshot.getChildren()){
+                            ModelOrderKitchen modelOrderKitchen=ds.getValue(ModelOrderKitchen.class);
+                            //add to list
+                            orderKitchenArrayList.add(modelOrderKitchen);
+
+                        }
+                        //setup adapter
+                        adapterOrderKitchen=new AdapterOrderKitchen(KitchenFood.this,orderKitchenArrayList);
+                        //set adapter to recyclerview
+                        ordersRv.setAdapter(adapterOrderKitchen);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+    //now create a filter class, we already have one,lets copy paste and change according to our adapter
+
+
     private void loadFilteredFood(String selected) {
         foodList=new ArrayList<>();
         //get all products
@@ -185,7 +258,7 @@ public class KitchenFood extends AppCompatActivity {
 
         //show products ui and hide orders ui
         foodTabRL.setVisibility(View.VISIBLE);
-//        ordersTabRL.setVisibility(View.GONE);
+        orderTabRL.setVisibility(View.GONE);
         tabFood.setTextColor(getResources().getColor(R.color.black));
         tabFood.setBackgroundResource(R.drawable.shape_rect01);
         tabOrder.setTextColor(getResources().getColor(R.color.white));
@@ -194,7 +267,7 @@ public class KitchenFood extends AppCompatActivity {
     private void showOrderTabUI() {
         //show order ui and hide food ui
         foodTabRL.setVisibility(View.GONE);
-//        ordersTabRL.setVisibility(View.VISIBLE);
+        orderTabRL.setVisibility(View.VISIBLE);
         tabFood.setTextColor(getResources().getColor(R.color.white));
         tabFood.setBackgroundColor(getResources().getColor(android.R.color.transparent));
         tabOrder.setTextColor(getResources().getColor(R.color.black));

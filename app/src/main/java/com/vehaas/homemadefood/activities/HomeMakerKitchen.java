@@ -1,5 +1,6 @@
 package com.vehaas.homemadefood.activities;
 
+import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,6 +20,10 @@ import com.vehaas.homemadefood.Kitchen_Newid_helper;
 import com.vehaas.homemadefood.R;
 
 public class HomeMakerKitchen extends AppCompatActivity {
+    @MainThread
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), HomeFragment.class));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +41,8 @@ public class HomeMakerKitchen extends AppCompatActivity {
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.hasChild(fAuth.getUid().toString())) {
+
+                if (snapshot.hasChild(fAuth.getUid().toString())) {//email,phone,name
                     startActivity(new Intent(getApplicationContext(),KitchenFood.class));
                     // run some code
                 }

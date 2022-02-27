@@ -80,8 +80,9 @@ public class AdapterCartItem extends RecyclerView.Adapter<AdapterCartItem.Holder
 //                notifyDataSetChanged();
 
                 double tx=Double.parseDouble(((KitchenDetailsActivity)context).sTotalTv.getText().toString().trim().replace("₹",""));
+                double totalPrice=tx-Double.parseDouble(cost.replace("₹",""));
                 ((KitchenDetailsActivity)context).allTotalPrice=0.00;
-                ((KitchenDetailsActivity)context).sTotalTv.setText("₹"+String.format("%.2f",));
+                ((KitchenDetailsActivity)context).sTotalTv.setText("₹"+String.format("%.2f",totalPrice));
 
                 notifyItemChanged(position);
                 notifyDataSetChanged();

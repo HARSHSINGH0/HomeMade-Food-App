@@ -1,18 +1,18 @@
 package com.vehaas.homemadefood.activities;
 
+import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.media.MediaMetadataCompat;
 import android.text.Editable;
-import android.text.Layout;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,10 +20,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,15 +34,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.vehaas.homemadefood.Constants;
 import com.vehaas.homemadefood.R;
 import com.vehaas.homemadefood.adapter.AdapterCartItem;
-import com.vehaas.homemadefood.adapter.AdapterFoodSeller;
 import com.vehaas.homemadefood.adapter.AdapterFoodUser;
-import com.vehaas.homemadefood.adapter.AdapterKitchen;
 import com.vehaas.homemadefood.model.ModelCartItem;
 import com.vehaas.homemadefood.model.ModelFood;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import p32929.androideasysql_library.Column;
 import p32929.androideasysql_library.EasyDB;
@@ -50,7 +48,7 @@ public class KitchenDetailsActivity extends AppCompatActivity {
 
 
     //declare ui views
-    private TextView kitchenNameTv,phoneTv,addressTv,filteredFoodTv,kitchenstyleTv;
+    private TextView kitchenNameTv,phoneTv,addressTv,filteredFoodTv,styleTv;
     private ImageButton backBtn,callBtn,cartBtn;
     private EditText searchFoodEt;
     private ImageButton filterFoodBtn;
@@ -59,12 +57,19 @@ public class KitchenDetailsActivity extends AppCompatActivity {
     private String kitchenUid;
     private String kitchenName,kitchenPhone,kitchenAddress,kitchenStyle;
     private FirebaseAuth firebaseAuth;
+    //progress dialog
+    private ProgressDialog progressDialog;
     private ArrayList<ModelFood> foodsList;
     private AdapterFoodUser adapterFoodUser;
 
     //cart
     private ArrayList<ModelCartItem> cartItemList;
     private AdapterCartItem adapterCartItem;
+
+    @MainThread
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), HomeFragment.class));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +79,7 @@ public class KitchenDetailsActivity extends AppCompatActivity {
         kitchenNameTv=findViewById(R.id.kitchenNameTv);
         phoneTv=findViewById(R.id.phoneTv);
         addressTv=findViewById(R.id.addressTv);
-        kitchenstyleTv=findViewById(R.id.styleTv);
+        styleTv=findViewById(R.id.styleTv);
         backBtn=findViewById(R.id.backBtn);
         callBtn=findViewById(R.id.callBtn);
         searchFoodEt=findViewById(R.id.searchFoodEt);
@@ -82,6 +87,12 @@ public class KitchenDetailsActivity extends AppCompatActivity {
         filteredFoodTv=findViewById(R.id.filteredFoodTv);
         foodsRv=findViewById(R.id.foodsRv);
         cartBtn=findViewById(R.id.cartBtn);
+
+        //init progress dialog
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setTitle("Please wait");
+        progressDialog.setCanceledOnTouchOutside(false);
+
 
         //get uid of the kitchen from intent
         kitchenUid=getIntent().getStringExtra("kitchenID");
@@ -155,6 +166,7 @@ public class KitchenDetailsActivity extends AppCompatActivity {
                                 else{
                                     //load filtered
                                     adapterFoodUser.getFilter().filter(selected);
+
                                 }
                             }
                         }).show();
@@ -185,17 +197,32 @@ public class KitchenDetailsActivity extends AppCompatActivity {
 
         //inflate cart layout
         View view= LayoutInflater.from(this).inflate(R.layout.dialog_cart,null);
+        Log.d("TAG", "showCartDialog: 1");
         //init views
         TextView kitchenNameTv=view.findViewById(R.id.kitchenNameTv);
+        Log.d("TAG", "showCartDialog: 2");
+
         RecyclerView cartItemRv=view.findViewById(R.id.cartItemRv);
+        Log.d("TAG", "showCartDialog: 3");
+
         sTotalTv=view.findViewById(R.id.sTotalTv);
+        Log.d("TAG", "showCartDialog: 4");
+
         Button checkOutBtn=view.findViewById(R.id.checkOutBtn);
+        Log.d("TAG", "showCartDialog: 5");
+
 
         //dialog
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        Log.d("TAG", "showCartDialog: 6");
+
         //set view to dialog
         builder.setView(view);
+        Log.d("TAG", "showCartDialog: 7");
+
         kitchenNameTv.setText(kitchenName);
+        Log.d("TAG", "showCartDialog: 8");
+
         EasyDB easyDB=EasyDB.init(this,"ITEMS_DB")
                 .setTableName("ITEMS_TABLE")
                 .addColumn(new Column("Item_Id",new String[]{"text","unique"}))
@@ -205,8 +232,12 @@ public class KitchenDetailsActivity extends AppCompatActivity {
                 .addColumn(new Column("Item_Price",new String[]{"text","not null"}))
                 .addColumn(new Column("Item_Quantity",new String[]{"text","not null"}))
                 .doneTableColumn();
+        Log.d("TAG", "showCartDialog: 9");
+
         //get all the records from db
         Cursor res=easyDB.getAllData();
+        Log.d("TAG", "showCartDialog: 10");
+
         while (res.moveToNext()){
             String id=res.getString(1);
             String pId=res.getString(2);
@@ -224,10 +255,16 @@ public class KitchenDetailsActivity extends AppCompatActivity {
                     ""+quantity);
             cartItemList.add(modelCartItem);
         }
+        Log.d("TAG", "showCartDialog: 11");
+
         //setup adapter
         adapterCartItem=new AdapterCartItem(this,cartItemList);
+        Log.d("TAG", "showCartDialog: 12");
+
         //set to recyclerview
         cartItemRv.setAdapter(adapterCartItem);
+        Log.d("TAG", "showCartDialog: 13");
+
 
         sTotalTv.setText("₹"+String.format("%.2f",allTotalPrice));
         //reset total price on dismmis
@@ -240,9 +277,107 @@ public class KitchenDetailsActivity extends AppCompatActivity {
                 allTotalPrice=0.00;
             }
         });
+        //place order
+        checkOutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //first validate delivery address
+                if(cartItemList.size()==0){
+                    //cart is empty
+                    Toast.makeText(KitchenDetailsActivity.this,"No item in the cart",Toast.LENGTH_SHORT).show();
+                    return;//dont proceed further
+
+                }
+                submitOrder();
+            }
+        });
 
 
+    }
 
+    private void submitOrder() {
+        //progress dialog
+        progressDialog.setMessage("Placing order...");
+        progressDialog.show();
+        //for order id and order time
+        String timestamp=""+System.currentTimeMillis();
+        String cost=sTotalTv.getText().toString().trim().replace("₹","");//remove ₹ if contains
+        HashMap<String,String> hashMap=new HashMap<>();
+        hashMap.put("orderId",""+timestamp);
+        hashMap.put("orderTime",""+timestamp);
+        hashMap.put("orderStatus","In Progress");//In progress/complete/cancelled
+        hashMap.put("orderCost",""+cost);
+        hashMap.put("orderBy",""+firebaseAuth.getUid());
+        hashMap.put("orderTo",""+kitchenUid);
+//        //test add to db
+//        FirebaseAuth fAuth;
+//        FirebaseFirestore fStore;
+//        fAuth = FirebaseAuth.getInstance();
+//        fStore= FirebaseFirestore.getInstance();
+//        String userID = fAuth.getCurrentUser().getUid();
+//        DocumentReference documentReference=fStore.collection("users").document(""+fAuth.getUid());
+//
+//
+//        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//            @Override
+//            public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                if(documentSnapshot.exists()){
+//                    String email=(documentSnapshot.getString("email"));
+//                    String name=(documentSnapshot.getString("name"));
+//                    String phone=(documentSnapshot.getString("phone"));
+//
+//                    FirebaseDatabase rootNode;
+//                    DatabaseReference reference;
+//                    rootNode=FirebaseDatabase.getInstance();
+//                    reference=rootNode.getReference("kitchen");
+//                    HashMap<String,String> hashMap1=new HashMap<>();
+//                    hashMap1.put("name",name);
+//                    hashMap1.put("email",email);
+//                    hashMap1.put("phone",phone);
+////                    Newid_helper helperClass=new Newid_helper(name,email,phone);
+//                    reference.child("name").push().setValue(name);
+//                    reference.child("email").push().setValue(email);
+//                    reference.child("phone").push().setValue(phone);
+//
+//
+//
+//
+//                }}});
+        //add to db
+        DatabaseReference ref=FirebaseDatabase.getInstance().getReference("kitchen").child(kitchenUid).child("orders");//this was orders
+        ref.child(timestamp).setValue(hashMap)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        //order info added now add order items
+                        for (int i=0;i<cartItemList.size();i++){
+                            String pId=cartItemList.get(i).getpId();
+                            String id=cartItemList.get(i).getId();
+                            String cost=cartItemList.get(i).getCost();
+                            String name=cartItemList.get(i).getName();
+                            String price=cartItemList.get(i).getPrice();
+                            String quantity=cartItemList.get(i).getQuantity();
+                            HashMap<String,String> hashMap1=new HashMap<>();
+                            hashMap1.put("pId",pId);
+                            hashMap1.put("name",name);
+                            hashMap1.put("cost",cost);
+                            hashMap1.put("price",price);
+                            hashMap1.put("quantity",quantity);
+
+                            ref.child(timestamp).child("Items").child(pId).setValue(hashMap1);
+                        }
+                        progressDialog.dismiss();
+                        Toast.makeText(KitchenDetailsActivity.this,"Order Placed Successfully.....",Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //failed placing order
+                        progressDialog.dismiss();
+                        Toast.makeText(KitchenDetailsActivity.this,""+e.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void dialPhone() {
@@ -264,7 +399,7 @@ public class KitchenDetailsActivity extends AppCompatActivity {
                 kitchenNameTv.setText(kitchenName);
                 phoneTv.setText("Phone: ₹"+kitchenPhone);
                 addressTv.setText("Address:\n"+kitchenAddress);
-                //kitchenstyleTv.setText("Food Style:\n"+kitchenStyle);
+                styleTv.setText("Food Style:"+kitchenStyle);
             }
 
             @Override
@@ -278,7 +413,7 @@ public class KitchenDetailsActivity extends AppCompatActivity {
         foodsList=new ArrayList<>();
         DatabaseReference reference=FirebaseDatabase.getInstance().getReference("kitchen");
 
-        reference.child(kitchenUid).child("foods")
+        reference.child(kitchenUid).child("foods")//this was order
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {

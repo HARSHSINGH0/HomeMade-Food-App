@@ -31,23 +31,29 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.vehaas.homemadefood.R;
 import com.vehaas.homemadefood.adapter.AdapterKitchen;
+import com.vehaas.homemadefood.adapter.AdapterOrderUser;
 import com.vehaas.homemadefood.model.ModelKitchen;
+import com.vehaas.homemadefood.model.ModelOrderUser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.Executor;
 
 public class HomeFragment extends Fragment {
     TextView hello_name1;
-    TextView tabKitchenUser,tabOrderUser;
+    TextView tabKitchenUser,tabOrderUser,hello_name;
     private RelativeLayout kitchenRl,orderRl;
 
     private FirebaseAuth fAuth;
     private FirebaseFirestore fStore;
-    private RecyclerView kitchenRv;
+    private RecyclerView kitchenRv,ordersRv;
 
     private ArrayList<ModelKitchen> kitchensList;
     private AdapterKitchen adapterKitchen;
+
+    private ArrayList<ModelOrderUser> ordersList;
+    private AdapterOrderUser adapterOrderUser;
     String userID;
     @Nullable
     @Override
@@ -67,9 +73,12 @@ public class HomeFragment extends Fragment {
         kitchenRl=v.findViewById(R.id.kitchenRl);
         orderRl=v.findViewById(R.id.orderRl);
         kitchenRv=v.findViewById(R.id.kitchenRv);
-
+        ordersRv=v.findViewById(R.id.ordersRv);
+        hello_name=v.findViewById(R.id.hello_name);
 
         loadKitchen();
+        loadOrders();
+
         //at start show kitchen
         showKitchenUI();
         tabKitchenUser.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +97,55 @@ public class HomeFragment extends Fragment {
         });
 
         return v;
+    }
+
+
+
+    private void loadOrders() {
+        //init order list
+        ordersList=new ArrayList<>();
+
+        //get Orders
+        DatabaseReference ref=FirebaseDatabase.getInstance().getReference("kitchen");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ordersList.clear();
+                for (DataSnapshot ds:snapshot.getChildren()){
+                    String uid=""+ds.getRef().getKey();
+
+                    DatabaseReference ref=FirebaseDatabase.getInstance().getReference("kitchen").child(uid).child("orders");//this was orders
+                    ref.orderByChild("orderBy").equalTo(fAuth.getUid())
+                            .addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    if(snapshot.exists()){
+                                        for (DataSnapshot ds:snapshot.getChildren()){
+                                            ModelOrderUser modelOrderUser=ds.getValue(ModelOrderUser.class);
+
+                                            //add to list
+                                            ordersList.add(modelOrderUser);
+                                        }
+                                        //setup adapter
+                                        adapterOrderUser=new AdapterOrderUser(getActivity(),ordersList);
+                                        //set to recyclerview
+                                        ordersRv.setAdapter(adapterOrderUser);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void loadKitchen() {

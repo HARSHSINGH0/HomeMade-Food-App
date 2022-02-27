@@ -90,15 +90,17 @@
         android:fontFamily="@font/baloo_thambi"
         android:layout_marginLeft="10dp"
         android:text="Timing"/>
+
     <TextView
         android:id="@+id/stockRemainingTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
         android:layout_below="@+id/timingFoodTv"
-        android:textSize="15sp"
-        android:fontFamily="@font/baloo_thambi"
         android:layout_marginLeft="10dp"
-        android:text="Stock Remaining"/>
+        android:fontFamily="@font/baloo_thambi"
+        android:text="Stock Remaining"
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/priceTv"

@@ -9,14 +9,13 @@ public class ModelKitchen {
 
 
 
-    public ModelKitchen(String kitchen_desc, String kitchen_userId, String kitchen_name, String kitchen_phone, String kitchen_style, String kitchen_address, String kitchen_style1) {
+    public ModelKitchen(String kitchen_desc, String kitchen_userId, String kitchen_name, String kitchen_phone, String kitchen_style, String kitchen_address) {
         this.kitchen_desc = kitchen_desc;
         this.kitchen_userId = kitchen_userId;
         this.Kitchen_name = kitchen_name;
         this.kitchen_phone = kitchen_phone;
         this.Kitchen_style = kitchen_style;
         this.Kitchen_address = kitchen_address;
-        this.Kitchen_style = "Food styel"+kitchen_style1;
     }
 
     public String getKitchen_desc() {
