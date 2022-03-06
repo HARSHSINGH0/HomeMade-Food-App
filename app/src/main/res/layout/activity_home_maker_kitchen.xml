@@ -148,22 +148,7 @@
                     android:hint="1234567890"
                     android:inputType="number"
                     android:padding="10dp" />
-                <TextView
-                    android:id="@+id/image_kitchen"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/edt_phoneNumber"
-                    android:layout_marginTop="20sp"
-                    android:layout_marginBottom="20sp"
-                    android:fontFamily="@font/acme"
-                    android:text="Image : "
-                    android:textSize="20sp" />
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_below="@+id/edt_phoneNumber"
-                    android:layout_toRightOf="@+id/image_kitchen" />
 
             </RelativeLayout>
         </LinearLayout>

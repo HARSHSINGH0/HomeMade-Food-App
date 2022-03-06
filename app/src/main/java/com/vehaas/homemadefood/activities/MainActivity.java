@@ -8,9 +8,13 @@ import androidx.fragment.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.vehaas.homemadefood.R;
@@ -93,6 +97,7 @@ public class MainActivity extends AppCompatActivity{
         alert.show();
 
     }
+
     public void login_txt(View view) {
         startActivity(new Intent(getApplicationContext(),LoginFragment.class));
 

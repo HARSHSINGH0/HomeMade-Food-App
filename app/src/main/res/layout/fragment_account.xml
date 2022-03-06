@@ -33,13 +33,14 @@
                 android:textSize="30sp" />
 
             <TextView
-                android:id="@+id/editprofile"
+                android:id="@+id/passwdChange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/AccountSettingText"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/acme"
-                android:text="Edit Profile"
+                android:onClick="forgetPassword"
+                android:text="Password change request"
                 android:textColor="@android:color/darker_gray"
 
                 android:textSize="20sp" />
@@ -49,7 +50,7 @@
                 android:id="@+id/logouttext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/editprofile"
+                android:layout_below="@+id/passwdChange"
                 android:layout_marginTop="10dp"
                 android:clickable="true"
                 android:fontFamily="@font/acme"

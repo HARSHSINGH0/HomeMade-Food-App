@@ -17,6 +17,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.vehaas.homemadefood.R;
@@ -112,6 +114,19 @@ public class SignupFragment extends AppCompatActivity {
                             user.put("email",email);
                             user.put("phone",phone);
                             documentReference.set(user);
+
+                            //test
+//                            FirebaseDatabase rootNode;
+//                            DatabaseReference reference;
+//                            rootNode=FirebaseDatabase.getInstance();
+//                            reference=rootNode.getReference("kitchen");
+//                            FirebaseAuth fAuth;
+//                            fAuth = FirebaseAuth.getInstance();
+//                            String user_id = fAuth.getCurrentUser().getUid();
+//                            Newid_helper helperClass=new Newid_helper(name,email,phone,"0");//setting flag as 0 for kitchencheck
+//                            reference.child(user_id).setValue(helperClass);
+                            //test
+
                             Intent intent=new Intent(getApplicationContext(),MainActivity.class);
                             intent.putExtra("name",name);
                             startActivity(intent);

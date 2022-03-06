@@ -28,20 +28,15 @@
             android:text="dd/MM/yyyy"
             android:textColor="@color/black" />
 <!--        email of the user who has placed the order-->
-        <TextView
-            android:id="@+id/emailTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/orderIdTv"
-            android:text="abc@gmail.com"
-            android:textColor="@color/black" />
+
 <!--        total amount of order-->
         <TextView
             android:id="@+id/amountTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Total Amount: ₹1212.23"
-            android:layout_below="@+id/emailTv"
+            android:layout_below="@+id/nextIv"
+
             android:textColor="@color/InactiveBottomNavIconColor2"
             />
 <!--        order status:In progress/completed/cancelled-->
@@ -49,7 +44,7 @@
             android:id="@+id/statusTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/emailTv"
+            android:layout_below="@+id/nextIv"
             android:layout_marginTop="5dp"
             android:layout_toStartOf="@+id/nextIv"
             android:text="In Progress"

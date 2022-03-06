@@ -30,6 +30,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.vehaas.homemadefood.Constants;
 import com.vehaas.homemadefood.R;
@@ -296,6 +297,8 @@ public class KitchenDetailsActivity extends AppCompatActivity {
     }
 
     private void submitOrder() {
+        String orderByEmail,orderByPhone;
+
         //progress dialog
         progressDialog.setMessage("Placing order...");
         progressDialog.show();
@@ -309,6 +312,30 @@ public class KitchenDetailsActivity extends AppCompatActivity {
         hashMap.put("orderCost",""+cost);
         hashMap.put("orderBy",""+firebaseAuth.getUid());
         hashMap.put("orderTo",""+kitchenUid);
+
+        //test
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("users");
+        Log.d("TAG", "submitOrder: "+reference.child(firebaseAuth.getUid()).child("name").get());
+        Query checkUser=reference;
+        checkUser.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("TAG", "onDataChange: "+snapshot.child(""+firebaseAuth.getUid()));
+                String orderByName=snapshot.child(firebaseAuth.getUid()).child("name").getValue(String.class);
+                Log.d("TAG", "onDataChange: "+orderByName);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+//        hashMap.put("orderByName",""+orderByName);
+//        hashMap.put("orderByEmail",""+orderByEmail);
+//        hashMap.put("orderByPhone",""+orderByPhone);
+
+        //test
 //        //test add to db
 //        FirebaseAuth fAuth;
 //        FirebaseFirestore fStore;

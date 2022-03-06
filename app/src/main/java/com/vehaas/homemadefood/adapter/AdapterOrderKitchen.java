@@ -1,6 +1,8 @@
 package com.vehaas.homemadefood.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +27,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.vehaas.homemadefood.FilterOrderKitchen;
 import com.vehaas.homemadefood.R;
+import com.vehaas.homemadefood.activities.OrderDetailsSellerActivtity;
 import com.vehaas.homemadefood.model.ModelOrderKitchen;
 import com.vehaas.homemadefood.model.ModelOrderUser;
 
@@ -69,7 +72,7 @@ public class AdapterOrderKitchen extends RecyclerView.Adapter<AdapterOrderKitche
 //
 //        //load user/buyer info
 //        loadUserInfo(modelOrderKitchen,holder);
-        loadUserInfo(modelOrderKitchen,holder);
+        //loadUserInfo(modelOrderKitchen,holder);
 
         //set data
         holder.amountTv.setText("Amount: ₹"+orderCost);
@@ -98,7 +101,11 @@ public class AdapterOrderKitchen extends RecyclerView.Adapter<AdapterOrderKitche
             @Override
             public void onClick(View view) {
                 //open order details
-//
+                Intent intent=new Intent(context, OrderDetailsSellerActivtity.class);
+                intent.putExtra("orderId",orderId); //to load order info
+                intent.putExtra("orderBy",orderBy); //to load info of the user who places order
+                context.startActivity(intent);
+
             }
         });
     }
@@ -113,9 +120,7 @@ public class AdapterOrderKitchen extends RecyclerView.Adapter<AdapterOrderKitche
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         String email=""+snapshot.child("email").getValue();
-
-                        holder.emailTv.setText(email);//set this tommorow as userid
-
+                        //holder.emailTv.setText(email);//set this tommorow as userid
                     }
 
                     @Override
@@ -170,11 +175,12 @@ public class AdapterOrderKitchen extends RecyclerView.Adapter<AdapterOrderKitche
             super(itemView);
             orderIdTv=itemView.findViewById(R.id.orderIdTv);
             orderDateTv=itemView.findViewById(R.id.orderDateTv);
-            emailTv=itemView.findViewById(R.id.emailTv);
             amountTv=itemView.findViewById(R.id.amountTv);
             statusTv=itemView.findViewById(R.id.statusTv);
         }
 
     }
+
+
 
 }
