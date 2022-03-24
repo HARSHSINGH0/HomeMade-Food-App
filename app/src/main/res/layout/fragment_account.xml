@@ -32,25 +32,25 @@
                 android:textColor="@color/black"
                 android:textSize="30sp" />
 
-            <TextView
-                android:id="@+id/passwdChange"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/AccountSettingText"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/acme"
-                android:onClick="forgetPassword"
-                android:text="Password change request"
-                android:textColor="@android:color/darker_gray"
+<!--            <TextView-->
+<!--                android:id="@+id/passwdChange"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/AccountSettingText"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:fontFamily="@font/acme"-->
+<!--                android:onClick="forgetPassword"-->
+<!--                android:text="Password change request"-->
+<!--                android:textColor="@android:color/darker_gray"-->
 
-                android:textSize="20sp" />
+<!--                android:textSize="20sp" />-->
 
 
             <TextView
                 android:id="@+id/logouttext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/passwdChange"
+                android:layout_below="@+id/AccountSettingText"
                 android:layout_marginTop="10dp"
                 android:clickable="true"
                 android:fontFamily="@font/acme"

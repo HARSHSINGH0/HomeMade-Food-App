@@ -114,48 +114,8 @@
                     android:text="Completed"/>
 
             </TableRow>
-            <TableRow>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:text="Buyer Phone"/>
-                <TextView
-                    android:id="@+id/phoneTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:text="+911234567890"
-                    android:autoLink="phone"/>
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:text="Buyer Email"/>
-                <TextView
-                    android:id="@+id/emailTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:text="test@gmail.com"
-                    android:autoLink="phone"/>
-            </TableRow>
+            <TableRow/>
+            <TableRow/>
             <TableRow>
                 <TextView
                     android:layout_width="wrap_content"

@@ -55,12 +55,13 @@ public class OrderDetailsSellerActivtity extends AppCompatActivity {
         phoneTv=findViewById(R.id.phoneTv);
         totalItemsTv=findViewById(R.id.totalItemsTv);
         amountTv=findViewById(R.id.amountTv);
-        emailTv=findViewById(R.id.emailTv);
+//        emailTv=findViewById(R.id.emailTv);
         itemsRv=findViewById(R.id.itemsRv);
 
         //get data from intent
         orderId=getIntent().getStringExtra("orderId");
         orderBy=getIntent().getStringExtra("orderBy");
+        Log.d("TAG", "onCreate: "+orderBy);
 
         firebaseAuth=FirebaseAuth.getInstance();
 //        loadMyinfo();
