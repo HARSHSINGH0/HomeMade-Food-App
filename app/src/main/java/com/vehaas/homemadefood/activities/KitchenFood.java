@@ -88,7 +88,6 @@ public class KitchenFood extends AppCompatActivity {
                 catch (Exception e){
                     e.printStackTrace();
                 }
-
             }
 
             @Override

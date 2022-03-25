@@ -65,7 +65,7 @@ public class OrderDetailsSellerActivtity extends AppCompatActivity {
 
         firebaseAuth=FirebaseAuth.getInstance();
 //        loadMyinfo();
-        loadBuyerinfo();
+        //loadBuyerinfo();
         loadOrderDetails();
         loadOrderedItems();
 
@@ -177,26 +177,26 @@ public class OrderDetailsSellerActivtity extends AppCompatActivity {
 
     }
 
-    private void loadBuyerinfo() {
-        DatabaseReference ref=FirebaseDatabase.getInstance().getReference("kitchen");
-        ref.child(orderBy).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //get buyer info
-                String email=""+snapshot.child("email").getValue();
-                String phone=""+snapshot.child("phone").getValue();
-                //set info
-                emailTv.setText(email);
-                phoneTv.setText(phone);
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
+//    private void loadBuyerinfo() {
+//        DatabaseReference ref=FirebaseDatabase.getInstance().getReference("kitchen");
+//        ref.child(orderBy).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                //get buyer info
+//                String email=""+snapshot.child("email").getValue();
+//                String phone=""+snapshot.child("phone").getValue();
+//                //set info
+//                emailTv.setText(email);
+//                phoneTv.setText(phone);
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//    }
 //    private void loadMyinfo() {
 //        DatabaseReference ref=FirebaseDatabase.getInstance().getReference("kitchen");
 //        ref.child(firebaseAuth.getUid())
@@ -225,7 +225,7 @@ public class OrderDetailsSellerActivtity extends AppCompatActivity {
                         for(DataSnapshot ds:dataSnapshot.getChildren()){
                             ModelOrderedItem modelOrderedItem=ds.getValue(ModelOrderedItem.class);
                             //add to list
-                            Log.d("TAG", "onDataChange: "+modelOrderedItem.getName());
+                            //Log.d("TAG", "onDataChange: "+modelOrderedItem.getName());
                             orderedItemArrayList.add(modelOrderedItem);
                         }
 //                        //setup adapter

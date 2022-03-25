@@ -92,6 +92,7 @@
             android:background="@color/black"
             android:fontFamily="@font/acme"
             android:text="Login"
+
             android:textSize="18sp" />
 
 
@@ -122,6 +123,7 @@
             android:onClick="create_txt"
             android:text="Create Account"
             android:textColor="@color/linkblue" />
+
     </RelativeLayout>
 
 </RelativeLayout>

@@ -101,7 +101,8 @@
         android:id="@+id/orderRl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/firstRelativehome">
+        android:layout_below="@+id/firstRelativehome"
+        >
 
 <!--        recyclerview: Show orders-->
         <androidx.recyclerview.widget.RecyclerView

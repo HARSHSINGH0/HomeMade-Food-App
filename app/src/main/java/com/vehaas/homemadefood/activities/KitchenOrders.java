@@ -158,7 +158,7 @@ public class KitchenOrders extends AppCompatActivity{
         progressDialog.setMessage("Adding Product.....");
         progressDialog.show();
         final String timestamp=""+System.currentTimeMillis();
-        Log.d("TAG", "addFood: image_uri"+image_uri);
+
         if(image_uri==null){
             //upload without image
 

@@ -6,10 +6,12 @@
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2015" />
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/drawable/bottom_nav_icon_color.xml" value="0.194" />
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/drawable/ic__.xml" value="0.2305" />
+        <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/drawable/ic_add_black.xml" value="0.3035" />
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.2305" />
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/drawable/ic_baseline_add_circle_outline_24.xml" value="0.1365" />
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1365" />
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.1365" />
+        <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/drawable/ic_baseline_directions_walk_24.xml" value="0.3035" />
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.1365" />
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/drawable/ic_baseline_fastfood_24.xml" value="0.1365" />
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/drawable/ic_baseline_filter.xml" value="0.1365" />
@@ -31,6 +33,10 @@
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/drawable/shape_rec02.xml" value="0.3055" />
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/drawable/shape_rect01.xml" value="0.3055" />
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/drawable/shape_rect03.xml" value="0.2195" />
+        <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/font/aladin.xml" value="0.3927083333333333" />
+        <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/font/baloo_thambi.xml" value="0.3927083333333333" />
+        <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/font/lobster.xml" value="0.3927083333333333" />
+        <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/font/test.xml" value="0.3927083333333333" />
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/layout/activity_edit_food.xml" value="0.25" />
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/layout/activity_home_maker_kitchen.xml" value="0.25" />
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/layout/activity_kitchen_details.xml" value="0.33" />
@@ -40,6 +46,7 @@
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/layout/activity_kitchen_orders.xml" value="0.22" />
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/layout/activity_main.xml" value="0.21" />
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/layout/activity_order_details_seller_activtity.xml" value="0.25" />
+        <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/layout/activity_test.xml" value="0.3625" />
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/layout/add_food_layout.xml" value="0.14673913043478262" />
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/layout/bs_food_details_seller.xml" value="0.22" />
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/layout/dialog_cart.xml" value="0.25" />
@@ -53,7 +60,7 @@
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/layout/fragment_login2.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/layout/fragment_order_scrolling.xml" value="0.1" />
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/layout/fragment_search.xml" value="0.17603850050658562" />
-        <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/layout/fragment_signup.xml" value="0.16" />
+        <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/layout/fragment_signup.xml" value="0.25" />
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/layout/kitchen_food_test.xml" value="0.3625" />
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/layout/row_cartitem.xml" value="0.33" />
         <entry key="..\:/Users/hs475/AndroidStudioProjects/HomeMadeFood/app/src/main/res/layout/row_food_seller.xml" value="0.25" />
